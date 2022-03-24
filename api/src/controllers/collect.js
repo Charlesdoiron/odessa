@@ -51,7 +51,7 @@ router.get(
 
 router.post(
   "/",
-  passport.authenticate("user", { session: false }),
+  // passport.authenticate("user", { session: false }),
   catchErrors(async (req, res, next) => {
     const newCollect = {};
 
@@ -60,11 +60,15 @@ router.post(
     if (req.body.hasOwnProperty("pickupGeometry")) newCollect.pickupGeometry = req.body.pickupGeometry;
     if (req.body.hasOwnProperty("loadingVolume")) newCollect.loadingVolume = req.body.loadingVolume;
     if (req.body.hasOwnProperty("user")) newCollect.user = req.body.user;
+    if (req.body.hasOwnProperty("email")) newCollect.email = req.body.email;
+    if (req.body.hasOwnProperty("phone")) newCollect.phone = req.body.phone;
+    if (req.body.hasOwnProperty("name")) newCollect.name = req.body.name;
     if (req.body.hasOwnProperty("convoy")) newCollect.convoy = req.body.convoy;
     if (req.body.hasOwnProperty("whatsappLink")) newCollect.whatsappLink = req.body.whatsappLink;
     if (req.body.hasOwnProperty("status")) newCollect.status = req.body.status;
 
-    const collect = await CollectModel.create(newCollect).populate("user convoy");
+    const createdCollect = await CollectModel.create(newCollect);
+    const collect = await CollectModel.findById(createdCollect._id).populate("user convoy");
 
     return res.status(200).send({
       ok: true,
@@ -94,6 +98,9 @@ router.put(
     if (req.body.hasOwnProperty("pickupGeometry")) updatedCollect.pickupGeometry = req.body.pickupGeometry;
     if (req.body.hasOwnProperty("loadingVolume")) updatedCollect.loadingVolume = req.body.loadingVolume;
     if (req.body.hasOwnProperty("user")) updatedCollect.user = req.body.user;
+    if (req.body.hasOwnProperty("email")) updatedCollect.email = req.body.email;
+    if (req.body.hasOwnProperty("phone")) updatedCollect.phone = req.body.phone;
+    if (req.body.hasOwnProperty("name")) updatedCollect.name = req.body.name;
     if (req.body.hasOwnProperty("convoy")) updatedCollect.convoy = req.body.convoy;
     if (req.body.hasOwnProperty("whatsappLink")) updatedCollect.whatsappLink = req.body.whatsappLink;
     if (req.body.hasOwnProperty("status")) updatedCollect.status = req.body.status;

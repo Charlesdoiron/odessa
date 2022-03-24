@@ -3,7 +3,7 @@ const passport = require("passport");
 const mapbox = require("../mapbox");
 const router = express.Router();
 
-const { catchErrors } = require("../utils");
+const { catchErrors } = require("../errors");
 
 router.post(
   "/list",

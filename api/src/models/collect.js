@@ -25,7 +25,22 @@ const Schema = new mongoose.Schema(
     },
     loadingVolume: String,
     convoy: { type: mongoose.Types.ObjectId, ref: "convoy" },
+    // either a register user...
     user: { type: mongoose.Types.ObjectId, ref: "user" },
+    // ...or not
+    email: {
+      type: String,
+      trim: true,
+      lowercase: true,
+      match: [/^.+@(?:[\w-]+\.)+\w+$/, "Please fill a valid email address"],
+    },
+    phone: {
+      type: String,
+      trim: true,
+      lowercase: true,
+    },
+    name: { type: String },
+
     whatsappLink: String,
     status: { type: String, enum: ["preparation", "ongoing", "completed"] },
   },

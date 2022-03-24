@@ -28,10 +28,26 @@ const Schema = new mongoose.Schema(
       type: locationSchema,
       index: "2dsphere",
     },
-    placesInCar: Number,
-    loadingVolume: String,
+    availableSeat: Number,
+    availableVolume: String,
+    needs: String,
 
+    // either a register user...
     driver: { type: mongoose.Types.ObjectId, ref: "user" },
+    // ...or not
+    email: {
+      type: String,
+      trim: true,
+      lowercase: true,
+      match: [/^.+@(?:[\w-]+\.)+\w+$/, "Please fill a valid email address"],
+    },
+    phone: {
+      type: String,
+      trim: true,
+      lowercase: true,
+    },
+    name: { type: String },
+
     whatsappLink: String,
     status: { type: String, enum: ["preparation", "loaded", "processing", "delivered"] },
   },
