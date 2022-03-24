@@ -1,44 +1,41 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Menu, Popover, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import { SearchIcon } from "@heroicons/react/solid";
 import { Map } from "components/map";
 import { Cards } from "components/cards";
+import { Form } from "components/form";
 
 const user = {
-  name: "Tom Cook",
-  email: "tom@example.com",
+  name: "Charles d'Oiron",
+  email: "charles@fragile.studio",
   imageUrl:
     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 };
-const navigation = [
-  { name: "Convoi", href: "/convoi", current: true },
-  { name: "Collecte", href: "/collecte", current: false },
-  { name: "Resources", href: "#", current: false },
-  { name: "Company Directory", href: "#", current: false },
-  { name: "Openings", href: "#", current: false },
-];
+
 const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
+  { name: "Votre profil", href: "#" },
+  { name: "Se déconnecter", href: "#" },
 ];
 
-function classNames(...classes) {
+function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
 export const Home = () => {
+  const [showForm, setShowForm] = useState(false);
+
+  const navigation = [
+    {
+      name: "Afficher la carte",
+      onClick: () => setShowForm(false),
+      current: true,
+    },
+    { name: "Convoi", current: true },
+    { name: "Collecte", current: false },
+  ];
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-100">
-        <body class="h-full">
-        ```
-      */}
       <div className="min-h-full">
         <Popover as="header" className="pb-24 bg-indigo-600">
           {({ open }) => (
@@ -53,11 +50,11 @@ export const Home = () => {
                   {/* Right section on desktop */}
                   <div className="hidden lg:ml-4 lg:flex lg:items-center lg:pr-0.5">
                     <button
+                      onClick={() => setShowForm(true)}
                       type="button"
-                      className="flex-shrink-0 p-1 text-indigo-200 rounded-full hover:text-white hover:bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white"
+                      className="flex-shrink-0 p-1 text-indigo-200 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5"
                     >
-                      <span className="sr-only">View notifications</span>
-                      <BellIcon className="h-6 w-6" aria-hidden="true" />
+                      Créer une action
                     </button>
 
                     {/* Profile dropdown */}
@@ -99,11 +96,11 @@ export const Home = () => {
                     </Menu>
                   </div>
 
-                  {/* Search */}
+                  {/* Search MOBILE */}
                   <div className="flex-1 min-w-0 px-12 lg:hidden">
                     <div className="max-w-xs w-full mx-auto">
                       <label htmlFor="desktop-search" className="sr-only">
-                        Search
+                        Rechercher par adresse / ville
                       </label>
                       <div className="relative text-white focus-within:text-gray-600">
                         <div className="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
@@ -112,7 +109,7 @@ export const Home = () => {
                         <input
                           id="desktop-search"
                           className="block w-full bg-white bg-opacity-20 py-2 pl-10 pr-3 border border-transparent rounded-md leading-5 text-gray-900 placeholder-white focus:outline-none focus:bg-opacity-100 focus:border-transparent focus:placeholder-gray-500 focus:ring-0 sm:text-sm"
-                          placeholder="Search"
+                          placeholder="Rechercher par adresse / ville"
                           type="search"
                           name="search"
                         />
@@ -141,9 +138,9 @@ export const Home = () => {
                     <div className="col-span-2">
                       <nav className="flex space-x-4">
                         {navigation.map((item) => (
-                          <a
+                          <button
                             key={item.name}
-                            href={item.href}
+                            onClick={item.onClick}
                             className={classNames(
                               item.current ? "text-white" : "text-indigo-100",
                               "text-sm font-medium rounded-md bg-white bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
@@ -151,14 +148,14 @@ export const Home = () => {
                             aria-current={item.current ? "page" : undefined}
                           >
                             {item.name}
-                          </a>
+                          </button>
                         ))}
                       </nav>
                     </div>
                     <div>
-                      <div className="max-w-md w-full mx-auto">
+                      <div className="">
                         <label htmlFor="mobile-search" className="sr-only">
-                          Search
+                          Rechercher par adresse / ville
                         </label>
                         <div className="relative text-white focus-within:text-gray-600">
                           <div className="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
@@ -169,8 +166,8 @@ export const Home = () => {
                           </div>
                           <input
                             id="mobile-search"
-                            className="block w-full bg-white bg-opacity-20 py-2 pl-10 pr-3 border border-transparent rounded-md leading-5 text-gray-900 placeholder-white focus:outline-none focus:bg-opacity-100 focus:border-transparent focus:placeholder-gray-500 focus:ring-0 sm:text-sm"
-                            placeholder="Search"
+                            className="block w-full bg-white bg-opacity-20 py-5 pl-10 pr-3 border border-transparent rounded-md leading-5 text-gray-900 placeholder-white focus:outline-none focus:bg-opacity-100 focus:border-transparent focus:placeholder-gray-500 focus:ring-0 sm:text-sm"
+                            placeholder="Rechercher par adresse / ville"
                             type="search"
                             name="search"
                           />
@@ -227,34 +224,22 @@ export const Home = () => {
                           </div>
                           <div className="mt-3 px-2 space-y-1">
                             <a
-                              href="#"
+                              href="/"
                               className="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800"
                             >
-                              Home
+                              Page 1{" "}
                             </a>
                             <a
-                              href="#"
+                              href="/"
                               className="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800"
                             >
-                              Profile
+                              Page 2
                             </a>
                             <a
-                              href="#"
+                              href="/"
                               className="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800"
                             >
-                              Resources
-                            </a>
-                            <a
-                              href="#"
-                              className="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800"
-                            >
-                              Company Directory
-                            </a>
-                            <a
-                              href="#"
-                              className="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800"
-                            >
-                              Openings
+                              Page 3
                             </a>
                           </div>
                         </div>
@@ -313,7 +298,7 @@ export const Home = () => {
             <h1 className="sr-only">Page title</h1>
             {/* Main 3 column grid */}
             <div className="grid grid-cols-1 gap-4 items-start lg:grid-cols-3 lg:gap-8">
-              {/* Right column */}
+              {/* Left column */}
               <div className="grid grid-cols-1 gap-4">
                 <section aria-labelledby="section-2-title">
                   <h2 className="sr-only" id="section-2-title">
@@ -326,8 +311,9 @@ export const Home = () => {
                   </div>
                 </section>
               </div>
-              {/* Left column */}
-              <div className="grid grid-cols-1 gap-4 lg:col-span-2 ">
+              {/* Right column */}
+              {/* <div className="grid grid-cols-1 gap-4 lg:col-span-2 ">
+              
                 <section aria-labelledby="section-1-title">
                   <h2 className="sr-only" id="section-1-title">
                     Section title
@@ -336,6 +322,16 @@ export const Home = () => {
                     <div className="p-6">
                       <Map />
                     </div>
+                  </div>
+                </section>
+              </div> */}
+              <div className="grid grid-cols-1 gap-4 lg:col-span-2 ">
+                <section aria-labelledby="section-1-title">
+                  <h2 className="sr-only" id="section-1-title">
+                    Création d'un convoi
+                  </h2>
+                  <div className="rounded-lg bg-white overflow-hidden shadow">
+                    <div className="p-6">{showForm ? <Form /> : <Map />}</div>
                   </div>
                 </section>
               </div>

@@ -14,10 +14,10 @@ const AnyReactComponent: React.FC<Props> = ({ text, lat, lng }) => (
 export const Map: React.FC = () => {
   const defaultProps = {
     center: {
-      lat: 10.99835602,
-      lng: 77.01502627,
+      lat: 48.856614,
+      lng: 2.3522219,
     },
-    zoom: 11,
+    zoom: 6,
   };
 
   return (
