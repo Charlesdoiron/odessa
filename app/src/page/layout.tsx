@@ -6,8 +6,6 @@ import { Cards } from "components/cards";
 import classNames from "services/classNames";
 import { Link } from "react-router-dom";
 
-casldkcasdlkcnlkn;
-
 const user = {
   name: "Charles d'Oiron",
   email: "charles@fragile.studio",
@@ -44,20 +42,24 @@ export const Layout = ({ children }: Props) => {
               <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 ">
                 <div className="relative py-5 flex items-center justify-center lg:justify-between">
                   {/* Logo */}
-                  <div className="absolute left-0 flex-shrink-0 lg:static">🇺🇦</div>
+                  <div className="absolute left-0 flex-shrink-0 lg:static">
+                    🇺🇦
+                  </div>
 
                   {/* Right section on desktop */}
                   <div className="hidden lg:ml-4 lg:flex lg:items-center lg:pr-0.5">
                     <Link
                       to="/convoy-create"
                       type="button"
-                      className="flex-shrink-0 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5">
+                      className="flex-shrink-0 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5"
+                    >
                       Créer un convoi
                     </Link>
                     <Link
                       to="/collect-create"
                       type="button"
-                      className="flex-shrink-0 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5">
+                      className="flex-shrink-0 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5"
+                    >
                       Créer une collecte
                     </Link>
 
@@ -66,14 +68,19 @@ export const Layout = ({ children }: Props) => {
                       <div>
                         <Menu.Button className="bg-white rounded-full flex text-sm ring-2 ring-white ring-opacity-20 focus:outline-none focus:ring-opacity-100">
                           <span className="sr-only">Open user menu</span>
-                          <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" />
+                          <img
+                            className="h-8 w-8 rounded-full"
+                            src={user.imageUrl}
+                            alt=""
+                          />
                         </Menu.Button>
                       </div>
                       <Transition
                         as={Fragment}
                         leave="transition ease-in duration-75"
                         leaveFrom="transform opacity-100 scale-100"
-                        leaveTo="transform opacity-0 scale-95">
+                        leaveTo="transform opacity-0 scale-95"
+                      >
                         <Menu.Items className="origin-top-right z-40 absolute -right-2 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                           {userNavigation.map((item) => (
                             <Menu.Item key={item.name}>
@@ -83,7 +90,8 @@ export const Layout = ({ children }: Props) => {
                                   className={classNames(
                                     active ? "bg-gray-100" : "",
                                     "block px-4 py-2 text-sm text-gray-700"
-                                  )}>
+                                  )}
+                                >
                                   {item.name}
                                 </a>
                               )}
@@ -123,7 +131,10 @@ export const Layout = ({ children }: Props) => {
                       {open ? (
                         <XIcon className="block h-6 w-6" aria-hidden="true" />
                       ) : (
-                        <MenuIcon className="block h-6 w-6" aria-hidden="true" />
+                        <MenuIcon
+                          className="block h-6 w-6"
+                          aria-hidden="true"
+                        />
                       )}
                     </Popover.Button>
                   </div>
@@ -140,7 +151,8 @@ export const Layout = ({ children }: Props) => {
                               item.current ? "text-white" : "text-indigo-100",
                               "text-sm font-medium rounded-md bg-white bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
                             )}
-                            aria-current={item.current ? "page" : undefined}>
+                            aria-current={item.current ? "page" : undefined}
+                          >
                             {item.name}
                           </button>
                         ))}
@@ -153,7 +165,10 @@ export const Layout = ({ children }: Props) => {
                         </label>
                         <div className="relative text-white focus-within:text-gray-600">
                           <div className="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
-                            <SearchIcon className="h-5 w-5" aria-hidden="true" />
+                            <SearchIcon
+                              className="h-5 w-5"
+                              aria-hidden="true"
+                            />
                           </div>
                           <input
                             id="mobile-search"
@@ -178,7 +193,8 @@ export const Layout = ({ children }: Props) => {
                     enterTo="opacity-100"
                     leave="duration-150 ease-in"
                     leaveFrom="opacity-100"
-                    leaveTo="opacity-0">
+                    leaveTo="opacity-0"
+                  >
                     <Popover.Overlay className="z-20 fixed inset-0 bg-black bg-opacity-25" />
                   </Transition.Child>
 
@@ -189,10 +205,12 @@ export const Layout = ({ children }: Props) => {
                     enterTo="opacity-100 scale-100"
                     leave="duration-150 ease-in"
                     leaveFrom="opacity-100 scale-100"
-                    leaveTo="opacity-0 scale-95">
+                    leaveTo="opacity-0 scale-95"
+                  >
                     <Popover.Panel
                       focus
-                      className="z-30 absolute top-0 inset-x-0 max-w-3xl mx-auto w-full p-2 transition transform origin-top">
+                      className="z-30 absolute top-0 inset-x-0 max-w-3xl mx-auto w-full p-2 transition transform origin-top"
+                    >
                       <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y divide-gray-200">
                         <div className="pt-3 pb-2">
                           <div className="flex items-center justify-between px-4">
@@ -213,17 +231,20 @@ export const Layout = ({ children }: Props) => {
                           <div className="mt-3 px-2 space-y-1">
                             <a
                               href="/"
-                              className="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800">
+                              className="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800"
+                            >
                               Page 1{" "}
                             </a>
                             <a
                               href="/"
-                              className="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800">
+                              className="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800"
+                            >
                               Page 2
                             </a>
                             <a
                               href="/"
-                              className="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800">
+                              className="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800"
+                            >
                               Page 3
                             </a>
                           </div>
@@ -231,7 +252,11 @@ export const Layout = ({ children }: Props) => {
                         <div className="pt-4 pb-2">
                           <div className="flex items-center px-5">
                             <div className="flex-shrink-0">
-                              <img className="h-10 w-10 rounded-full" src={user.imageUrl} alt="" />
+                              <img
+                                className="h-10 w-10 rounded-full"
+                                src={user.imageUrl}
+                                alt=""
+                              />
                             </div>
                             <div className="ml-3 min-w-0 flex-1">
                               <div className="text-base font-medium text-gray-800 truncate">
@@ -243,9 +268,15 @@ export const Layout = ({ children }: Props) => {
                             </div>
                             <button
                               type="button"
-                              className="ml-auto flex-shrink-0 bg-white p-1 text-gray-400 rounded-full hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                              <span className="sr-only">View notifications</span>
-                              <BellIcon className="h-6 w-6" aria-hidden="true" />
+                              className="ml-auto flex-shrink-0 bg-white p-1 text-gray-400 rounded-full hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            >
+                              <span className="sr-only">
+                                View notifications
+                              </span>
+                              <BellIcon
+                                className="h-6 w-6"
+                                aria-hidden="true"
+                              />
                             </button>
                           </div>
                           <div className="mt-3 px-2 space-y-1">
@@ -253,7 +284,8 @@ export const Layout = ({ children }: Props) => {
                               <a
                                 key={item.name}
                                 href={item.href}
-                                className="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800">
+                                className="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800"
+                              >
                                 {item.name}
                               </a>
                             ))}
@@ -285,14 +317,18 @@ export const Layout = ({ children }: Props) => {
                   </div>
                 </section>
               </div>
-              <div className="grid grid-cols-1 gap-4 lg:col-span-2 ">{children}</div>
+              <div className="grid grid-cols-1 gap-4 lg:col-span-2 ">
+                {children}
+              </div>
             </div>
           </div>
         </main>
         <footer>
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 lg:max-w-7xl">
             <div className="border-t border-gray-200 py-8 text-sm text-gray-500 text-center sm:text-left">
-              <span className="block sm:inline">&copy; 2021 Tailwind Labs Inc.</span>{" "}
+              <span className="block sm:inline">
+                &copy; 2021 Tailwind Labs Inc.
+              </span>{" "}
               <span className="block sm:inline">All rights reserved.</span>
             </div>
           </div>
