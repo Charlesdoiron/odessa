@@ -62,6 +62,13 @@ export const Layout = ({ children }: Props) => {
                     >
                       Créer une collecte
                     </Link>
+                    <Link
+                      to="/collect-create"
+                      type="button"
+                      className="flex-shrink-0 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5"
+                    >
+                      Je suis chauffeur
+                    </Link>
 
                     {/* Profile dropdown */}
                     <Menu as="div" className="ml-4 relative flex-shrink-0">
