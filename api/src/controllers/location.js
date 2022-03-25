@@ -7,7 +7,7 @@ const { catchErrors } = require("../errors");
 
 router.post(
   "/list",
-  passport.authenticate("user", { session: false }),
+  // passport.authenticate("user", { session: false }),
   catchErrors(async (req, res) => {
     if (!req.body.expression) return res.status(409).send({ ok: false, error: "Please provide an expression" });
 
