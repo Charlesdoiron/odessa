@@ -1,9 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import mapboxgl from "mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
 
-// public token - nopb
-mapboxgl.accessToken =
-  "pk.eyJ1IjoiY2hhcmxlc2ZyYWdpbGUiLCJhIjoiY2tqazEweDEyOXh6MTJzbGIzZGc5M3Y5MiJ9.6DkYINqFtONlIkpWnjOu1g";
+mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
 
 const LAT = 47.081012;
 const LONG = 2.398782;
@@ -36,7 +34,10 @@ export const Map = () => {
 
   return (
     <div>
-      <div ref={mapContainer} className="h-[60vh] relative" />
+      <div
+        ref={mapContainer}
+        className="h-[60vh] relative border-dark border-md"
+      />
     </div>
   );
 };

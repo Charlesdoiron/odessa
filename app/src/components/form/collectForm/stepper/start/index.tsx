@@ -1,4 +1,4 @@
-import { Input } from "components/form/input";
+import { Input } from "components/form/inputs/input";
 import { useForm } from "react-hook-form";
 import { AnnotationIcon } from "@heroicons/react/outline";
 import { StepStatus } from "..";

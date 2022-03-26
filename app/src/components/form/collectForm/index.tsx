@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 
-import { Input } from "components/form/input";
-import { Textarea } from "components/form/textarea";
+import { Input } from "components/form/inputs/input";
+import { Textarea } from "components/form/inputs/textarea";
 import { StepStatus } from "./stepper";
 import API from "services/api";
 import { useState } from "react";
@@ -45,6 +45,12 @@ export const CollectForm: React.FC<Props> = ({ onAbort, setStep }) => {
       <div>
         <div className=" w-full">
           <div className="bg-white space-y-6 sm:p-6 w-full">
+            <p className="text-[30px] font-bold text-dark inline-block">
+              Créer une
+            </p>
+            <p className="text-[30px] font-bold text-indigo-600 inline-block ml-2 underline">
+              collecte
+            </p>
             <form onSubmit={onSubmit}>
               <div className=" bg-white ">
                 <div className="grid grid-cols-6 gap-6 mb-5 ">
@@ -52,7 +58,6 @@ export const CollectForm: React.FC<Props> = ({ onAbort, setStep }) => {
                     <Input
                       type="text"
                       id="pickupName"
-                      autoComplete="street-address"
                       label="Adresse de la collecte"
                       placeholder="Renseigner l'adresse de départ de la collecte"
                       register={register("pickupName", { required: true })}
@@ -146,12 +151,17 @@ export const CollectForm: React.FC<Props> = ({ onAbort, setStep }) => {
                 </div>
               </div>
               <div className="flex justify-between">
-                <button onClick={onAbort} type="submit" className="text-dark underline">
+                <button
+                  onClick={onAbort}
+                  type="submit"
+                  className="text-dark underline"
+                >
                   Annuler
                 </button>
                 <button
                   type="submit"
-                  className="inline-flex justify-center py-4 px-20 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                  className="inline-flex justify-center py-4 px-20 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
                   Créer la collecte
                 </button>
               </div>

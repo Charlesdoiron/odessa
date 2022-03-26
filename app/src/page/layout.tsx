@@ -4,7 +4,7 @@ import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import { SearchIcon } from "@heroicons/react/solid";
 import { Cards } from "components/cards";
 import classNames from "services/classNames";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const user = {
   name: "Charles d'Oiron",
@@ -23,11 +23,11 @@ type Props = {
 };
 export const Layout = ({ children }: Props) => {
   // const [showForm, setShowForm] = useState(false);
-
+  const navigate = useNavigate();
   const navigation = [
     {
       name: "Afficher la carte",
-      onClick: console.log,
+      onClick: () => navigate("/"),
       current: true,
     },
     // { name: "Convoi", current: true },
@@ -63,7 +63,7 @@ export const Layout = ({ children }: Props) => {
                       Créer une collecte
                     </Link>
                     <Link
-                      to="/collect-create"
+                      to="/driver-create"
                       type="button"
                       className="flex-shrink-0 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5"
                     >

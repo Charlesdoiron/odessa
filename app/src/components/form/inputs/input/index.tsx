@@ -3,7 +3,7 @@ interface Props {
   label: string;
   placeholder: string;
   id: string;
-  autoComplete: string;
+  autoComplete?: string;
   register: any;
   error?: any;
   onChange?: any;
