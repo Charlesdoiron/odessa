@@ -8,7 +8,7 @@ const ConvoyModel = require("../models/convoy");
 
 router.get(
   "/",
-  passport.authenticate("user", { session: false }),
+  // passport.authenticate("user", { session: false }),
   catchErrors(async (req, res) => {
     const query = {};
 
@@ -33,7 +33,7 @@ router.get(
 
 router.get(
   "/:_id",
-  passport.authenticate("user", { session: false }),
+  // passport.authenticate("user", { session: false }),
   catchErrors(async (req, res) => {
     try {
       z.string().regex(obnjectIdRegex).parse(req.params._id);
@@ -82,7 +82,7 @@ router.post(
 
 router.put(
   "/:_id",
-  passport.authenticate("user", { session: false }),
+  // passport.authenticate("user", { session: false }),
   catchErrors(async (req, res, next) => {
     try {
       z.string().regex(obnjectIdRegex).parse(req.params._id);
@@ -125,7 +125,7 @@ router.put(
 
 router.delete(
   "/:_id",
-  passport.authenticate("user", { session: false }),
+  // passport.authenticate("user", { session: false }),
   catchErrors(async (req, res, next) => {
     try {
       z.string().regex(obnjectIdRegex).parse(req.params._id);
