@@ -237,22 +237,22 @@ export const Layout = ({ children }: Props) => {
                           </div>
                           <div className="mt-3 px-2 space-y-1">
                             <a
-                              href="/"
+                              href="/convoy-create"
                               className="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800"
                             >
-                              Page 1{" "}
+                              Créer un convoi
                             </a>
                             <a
-                              href="/"
+                              href="/collect-create"
                               className="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800"
                             >
-                              Page 2
+                              Créer une collecte
                             </a>
                             <a
-                              href="/"
+                              href="/driver-create"
                               className="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800"
                             >
-                              Page 3
+                              Je suis chauffeur
                             </a>
                           </div>
                         </div>
