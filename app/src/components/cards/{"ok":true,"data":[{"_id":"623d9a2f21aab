@@ -1,0 +1,169 @@
+{
+  "ok": true,
+  "data": [
+    {
+      "_id": "623d9a2f21aab5b23b00490d",
+      "pickupName": "15 Rue Du Stade, 97442 Saint-Philippe",
+      "pickupGeometry": {
+        "type": "Point",
+        "coordinates": [
+          55.768028,
+          -21.359985
+        ],
+        "_id": "623d9a2f21aab5b23b00490e"
+      },
+      "availableSeat": 3,
+      "availableVolume": "4",
+      "needs": "non",
+      "email": "arnaud.ambroselli@yahoo.fr",
+      "phone": "0789458211",
+      "name": "Arnaud",
+      "createdAt": "2022-03-25T10:32:15.083Z",
+      "updatedAt": "2022-03-25T10:32:15.083Z",
+      "__v": 0
+    },
+    {
+      "_id": "623d9f55e118f815cacc63bb",
+      "pickupName": "24200, Sarlat-la-Canéda, Dordogne, France",
+      "pickupGeometry": {
+        "type": "Point",
+        "coordinates": [
+          1.216132,
+          44.887943
+        ],
+        "_id": "623d9f55e118f815cacc63bc"
+      },
+      "availableSeat": 10,
+      "availableVolume": "10",
+      "needs": "Test ",
+      "email": "doironc@fr.fr",
+      "phone": "dsds",
+      "name": "charles@",
+      "createdAt": "2022-03-25T10:54:13.406Z",
+      "updatedAt": "2022-03-25T10:54:13.406Z",
+      "__v": 0
+    },
+    {
+      "_id": "623da2ea3c9f087679834e3e",
+      "pickupName": "8 Place De La Porte De Champerret, 75017 Paris, France",
+      "pickupGeometry": {
+        "type": "Point",
+        "coordinates": [
+          2.290861,
+          48.886045
+        ],
+        "_id": "623da2ea3c9f087679834e3f"
+      },
+      "availableSeat": 3,
+      "availableVolume": "10",
+      "needs": "Besoin",
+      "email": "dds@df.fr",
+      "phone": "dsqdsqd",
+      "name": "dsds",
+      "createdAt": "2022-03-25T11:09:30.341Z",
+      "updatedAt": "2022-03-25T11:09:30.341Z",
+      "__v": 0
+    },
+    {
+      "_id": "623da3ca3c9f087679834e43",
+      "pickupName": "Asnières-sur-Seine, Hauts-de-Seine, France",
+      "pickupGeometry": {
+        "type": "Point",
+        "coordinates": [
+          2.28556,
+          48.91111
+        ],
+        "_id": "623da3ca3c9f087679834e44"
+      },
+      "availableSeat": 10,
+      "availableVolume": "21",
+      "needs": "dsqdsq",
+      "email": "s@d.fr",
+      "phone": "dsqqdqs",
+      "name": "dsqdqsd",
+      "createdAt": "2022-03-25T11:13:14.671Z",
+      "updatedAt": "2022-03-25T11:13:14.671Z",
+      "__v": 0
+    },
+    {
+      "_id": "623da573bdb927bd5e3ae636",
+      "pickupName": null,
+      "pickupGeometry": null,
+      "availableSeat": 10,
+      "availableVolume": "10",
+      "needs": "dsqd",
+      "email": "d@d.fr",
+      "phone": "dsqdsq",
+      "name": "dsq",
+      "createdAt": "2022-03-25T11:20:19.439Z",
+      "updatedAt": "2022-03-25T11:20:19.439Z",
+      "__v": 0
+    },
+    {
+      "_id": "623f0ffc9267bee725e116ec",
+      "pickupName": "23 Allée Des Rameaux, 97480 Saint-Joseph",
+      "pickupGeometry": {
+        "type": "Point",
+        "coordinates": [
+          55.674173,
+          -21.372294
+        ],
+        "_id": "623f0ffc9267bee725e116ed"
+      },
+      "availableSeat": 10,
+      "availableVolume": "10",
+      "needs": "dqsdqsd",
+      "email": "dsq@de.fr",
+      "phone": "dsqdqsd",
+      "name": "dsqd",
+      "createdAt": "2022-03-26T13:07:08.308Z",
+      "updatedAt": "2022-03-26T13:07:08.308Z",
+      "__v": 0
+    },
+    {
+      "_id": "623f1698231f6224a7b7ace7",
+      "pickupName": "Dsquared, 247-251 rue Saint Honoré, Paris, 75001, France",
+      "pickupGeometry": {
+        "type": "Point",
+        "coordinates": [
+          2.32729,
+          48.866945
+        ],
+        "_id": "623f1698231f6224a7b7ace8"
+      },
+      "availableSeat": 10,
+      "availableVolume": "10",
+      "needs": "dsqDQ",
+      "email": "sq@ds.fr",
+      "phone": "dsqd",
+      "name": "DSQ",
+      "createdAt": "2022-03-26T13:35:20.750Z",
+      "updatedAt": "2022-03-26T13:35:20.750Z",
+      "__v": 0
+    },
+    {
+      "_id": "623f1bcc326fe0b5a32fc922",
+      "pickupName": null,
+      "pickupGeometry": null,
+      "needs": "dsqd",
+      "email": "dsqdqs@fr.fr",
+      "phone": "dsqd",
+      "name": "dsqdsq",
+      "createdAt": "2022-03-26T13:57:32.676Z",
+      "updatedAt": "2022-03-26T13:57:32.676Z",
+      "__v": 0
+    },
+    {
+      "_id": "623f1bfd326fe0b5a32fc925",
+      "pickupName": null,
+      "pickupGeometry": null,
+      "needs": "dsq",
+      "email": "dsq@ds.fr",
+      "phone": "dsq",
+      "name": "dsq",
+      "createdAt": "2022-03-26T13:58:21.562Z",
+      "updatedAt": "2022-03-26T13:58:21.562Z",
+      "__v": 0
+    }
+  ]
+}

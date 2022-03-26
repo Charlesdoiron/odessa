@@ -13,7 +13,16 @@ import { CollectCreate } from "page/collect/create";
 import { DriverCreate } from "page/driver/create";
 import { Convoy } from "page/convoy";
 import { Collect } from "page/collect";
+import API from "services/api";
 
+const test = async () => {
+  const response = await API.get({
+    path: "/convoy",
+  });
+  console.log("Response", response);
+};
+
+test();
 const App: React.FC = () => {
   return (
     <BrowserRouter>
