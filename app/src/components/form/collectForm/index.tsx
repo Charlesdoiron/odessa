@@ -46,7 +46,7 @@ export const CollectForm: React.FC<Props> = ({ onAbort, setStep }) => {
         <div className=" w-full">
           <div className="bg-white space-y-6 sm:p-6 w-full">
             <p className="text-[30px] font-bold text-dark inline-block">
-              Créer une
+              Je Créer une
             </p>
             <p className="text-[30px] font-bold text-indigo-600 inline-block ml-2 underline">
               collecte

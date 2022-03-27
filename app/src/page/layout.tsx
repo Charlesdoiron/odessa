@@ -61,14 +61,14 @@ export const Layout = ({ children }: Props) => {
                       type="button"
                       className="flex-shrink-0 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5"
                     >
-                      Créer un convoi
+                      Je crée un convoi
                     </Link>
                     <Link
                       to="/collect-create"
                       type="button"
                       className="flex-shrink-0 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5"
                     >
-                      Créer une collecte
+                      Je crée une collecte
                     </Link>
                     <Link
                       to="/driver-create"
@@ -255,19 +255,25 @@ export const Layout = ({ children }: Props) => {
                               href="/convoy-create"
                               className="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800"
                             >
-                              Créer un convoi
+                              Je crée un convoi
                             </a>
                             <a
                               href="/collect-create"
                               className="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800"
                             >
-                              Créer une collecte
+                              Je crée une collecte
                             </a>
                             <a
                               href="/driver-create"
                               className="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800"
                             >
                               Je suis chauffeur
+                            </a>
+                            <a
+                              href="/hospitality-create"
+                              className="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800"
+                            >
+                              Je propose un logement
                             </a>
                           </div>
                         </div>

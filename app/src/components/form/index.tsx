@@ -45,13 +45,13 @@ export const Form = () => {
                   onClick={() => setFormType("convoy")}
                   className="inline-flex justify-center py-4 px-20 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
-                  Créer un convoi
+                  Je Créer un convoi
                 </button>
                 <button
                   onClick={() => setFormType("collect")}
                   className="ml-10 inline-flex justify-center py-4 px-20 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
-                  Créer une collecte
+                  Je Créer une collecte
                 </button>
               </div>
             </>
