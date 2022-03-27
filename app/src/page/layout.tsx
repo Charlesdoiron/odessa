@@ -4,7 +4,7 @@ import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import { SearchIcon } from "@heroicons/react/solid";
 import { Cards } from "components/cards";
 import classNames from "services/classNames";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const user = {
   name: "Charles d'Oiron",
@@ -22,17 +22,24 @@ type Props = {
   children: JSX.Element;
 };
 export const Layout = ({ children }: Props) => {
-  // const [showForm, setShowForm] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const { pathname } = location;
   const navigation = [
     {
       name: "Afficher la carte",
       onClick: () => navigate("/"),
       current: true,
     },
-    // { name: "Convoi", current: true },
-    // { name: "Collecte", current: false },
   ];
+  if (pathname === "/connexion") {
+    return (
+      <div className="h-[100vh] flex items-center justify-center">
+        {children}
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="min-h-full">
@@ -68,6 +75,13 @@ export const Layout = ({ children }: Props) => {
                       className="flex-shrink-0 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5"
                     >
                       Je suis chauffeur
+                    </Link>
+                    <Link
+                      to="/hospitality-create"
+                      type="button"
+                      className="flex-shrink-0 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5"
+                    >
+                      Je propose un logement
                     </Link>
 
                     {/* Profile dropdown */}
