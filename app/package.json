@@ -63,7 +63,6 @@
   },
   "engines": {
     "npm": "please-use-yarn",
-    "yarn": "< 2",
-    "node": ">= 16"
+    "yarn": "< 2"
   }
 }
