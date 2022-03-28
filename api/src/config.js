@@ -10,7 +10,7 @@ const APP_NAME = process.env.APP_NAME || "Convois pour l'Ukraine";
 
 const MAPBOX_API_TOKEN = process.env.MAPBOX_API_TOKEN;
 
-const CORS_ORIGIN_ALLOWED = [APP_URL];
+const CORS_ORIGIN_ALLOWED = [APP_URL, "https://odessafront.vercel.app/"];
 
 module.exports = {
   PORT,
