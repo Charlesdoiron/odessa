@@ -63,7 +63,7 @@ export const Layout = ({ children }: Props) => {
                     >
                       Je crée un convoi
                     </Link>
-                    <Link
+                    {/* <Link
                       to="/collect-create"
                       type="button"
                       className="flex-shrink-0 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5"
@@ -83,7 +83,7 @@ export const Layout = ({ children }: Props) => {
                       className="flex-shrink-0 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5"
                     >
                       Je propose un logement
-                    </Link>
+                    </Link> */}
 
                     {/* Profile dropdown */}
                     <Menu as="div" className="ml-4 relative flex-shrink-0">
@@ -257,7 +257,7 @@ export const Layout = ({ children }: Props) => {
                             >
                               Je crée un convoi
                             </a>
-                            <a
+                            {/* <a
                               href="/collect-create"
                               className="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800"
                             >
@@ -274,7 +274,7 @@ export const Layout = ({ children }: Props) => {
                               className="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800"
                             >
                               Je propose un logement
-                            </a>
+                            </a> */}
                           </div>
                         </div>
                         <div className="pt-4 pb-2">

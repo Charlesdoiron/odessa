@@ -70,7 +70,7 @@ export const InputDropDown: React.FC<Props> = ({
           >
             {choices.length === 0 && query !== "" ? (
               <div className="cursor-default select-none relative py-2 px-4 text-gray-700">
-                Nothing found.
+                Nous n'avons rien trouvé ...
               </div>
             ) : (
               choices.map((place: any) => (

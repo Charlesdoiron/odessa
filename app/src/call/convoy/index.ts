@@ -28,3 +28,12 @@ export const getConvoys = async () => {
 
   return response as ConvoysRes;
 };
+
+export const deleteConvoy = async (id: string | undefined) => {
+  if (!id) return;
+  const response = await API.delete({
+    path: `/convoy/${id}`,
+  });
+
+  return response;
+};

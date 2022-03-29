@@ -3,7 +3,7 @@ import {
   UsersIcon,
   BriefcaseIcon,
 } from "@heroicons/react/solid";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 // Mocks
 import { useEffect, useState } from "react";
@@ -15,12 +15,14 @@ export const Cards = () => {
   const [error, setError] = useState<string | undefined>(undefined);
   const navigate = useNavigate();
 
+  const { id } = useParams<{ id: string }>();
+
   useEffect(() => {
     getConvoys().then((res) => {
       if (res.ok) setState(res.data);
       else setError(res.error);
     });
-  }, []);
+  }, [id]);
 
   if (!state) return <>Chargement ...</>;
   if (error) return <p>{error}</p>;
@@ -31,13 +33,11 @@ export const Cards = () => {
         {state.map(
           ({
             _id,
-            name,
-            email,
-            needs,
             availableSeat,
             phone,
             pickupName,
             availableVolume,
+            status,
           }) => {
             const isConvoy = true;
 
@@ -62,11 +62,11 @@ export const Cards = () => {
                       <p
                         className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full  ${
                           isConvoy
-                            ? "bg-yellow-100 text-yellow-800"
-                            : "bg-green-100 text-green-800"
+                            ? "bg-green-100 text-green-800"
+                            : "bg-yellow-100 text-yellow-800"
                         }`}
                       >
-                        Convoi
+                        Convoi - {status?.label.toLowerCase()}
                       </p>
                     </div>
                   </div>

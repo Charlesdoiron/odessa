@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import API from "services/api";
-import { InputDropDown } from "../input-dropdown";
+import { InputDropDown } from "../search-dropdown";
 
 interface Props {
   type: string;
@@ -47,7 +47,7 @@ export const InputLocation: React.FC<Props> = ({
       setChoices(response.data);
     };
     clearTimeout(timeout.current);
-    timeout.current = setTimeout(getChoices, 300);
+    timeout.current = setTimeout(getChoices, 150);
   }, [expression]);
 
   const onSelectChoice = (choice) => {

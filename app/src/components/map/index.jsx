@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import mapboxgl from "mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
+import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
 
@@ -36,7 +36,7 @@ export const Map = () => {
     <div>
       <div
         ref={mapContainer}
-        className="h-[60vh] relative border-dark border-md"
+        className="h-[60vh] relative border-dark border-md w-full"
       />
     </div>
   );

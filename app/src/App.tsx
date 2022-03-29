@@ -13,19 +13,10 @@ import { CollectCreate } from "page/collect/create";
 import { DriverCreate } from "page/driver/create";
 import { Convoy } from "page/convoy";
 import { Collect } from "page/collect";
-import API from "services/api";
 import { HospitalityCreate } from "page/hospitality/create";
 import { Hospitality } from "page/hospitality";
 import { Signin } from "page/auth/signin";
 
-const test = async () => {
-  const response = await API.get({
-    path: "/convoy",
-  });
-  console.log("Response", response);
-};
-
-test();
 const App: React.FC = () => {
   return (
     <BrowserRouter>
@@ -35,8 +26,10 @@ const App: React.FC = () => {
           <Route path="/convoy-create" element={<ConvoyCreate />}></Route>
           <Route path="/convoy" element={<Home />}></Route>
           <Route path="/convoy/:id" element={<Convoy />}></Route>
+          <Route path="/convoy/:id/edit" element={<ConvoyCreate />}></Route>
 
           <Route path="/collect" element={<Home />}></Route>
+          <Route path="/collect-create" element={<CollectCreate />}></Route>
           <Route path="/collect-create" element={<CollectCreate />}></Route>
           <Route path="/hospitality/:id" element={<Collect />}></Route>
           <Route path="/hospitality" element={<Home />}></Route>

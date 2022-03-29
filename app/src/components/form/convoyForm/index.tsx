@@ -1,5 +1,6 @@
 // @ts-nocheck
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
+import { Checkbox } from "components/form/inputs/checkbox";
 
 import { Input } from "components/form/inputs/input";
 import { Textarea } from "components/form/inputs/textarea";
@@ -7,6 +8,7 @@ import API from "services/api";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { InputLocation } from "../inputs/input-location";
+import { Dropdown } from "../inputs/dropdown";
 
 // interface FormValues {
 //   adress: string;
@@ -22,26 +24,68 @@ import { InputLocation } from "../inputs/input-location";
 
 interface Props {
   onAbort: () => void;
+  initialValues?: ConvoyType | null;
+  isEditing?: boolean;
 }
 
-export const ConvoyForm: React.FC<Props> = ({ onAbort }) => {
+export const ConvoyForm: React.FC<Props> = ({
+  onAbort,
+  initialValues,
+  isEditing,
+}) => {
   const [pickupGeometry, setPickupGeometry] = useState(null);
   const [pickupName, setPickupName] = useState(null);
-
+  const [dropOffGeometry, setDropOffGeometry] = useState(null);
+  const [dropOffName, setDropOffName] = useState(null);
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+    watch,
+    control,
+  } = useForm({ defaultValues: initialValues });
+
   const onSubmit = handleSubmit(async (form) => {
-    const response = await API.post({
-      path: "/convoy",
-      body: { ...form, pickupName, pickupGeometry },
-    });
+    let response;
+
+    const body = {
+      ...form,
+      pickupName,
+      pickupGeometry,
+      dropOffName,
+      dropOffGeometry,
+    };
+
+    if (isEditing) {
+      response = await API.put({
+        path: `/convoy/${initialValues?._id}`,
+        body,
+      });
+    } else {
+      response = await API.post({
+        path: "/convoy",
+        body,
+      });
+    }
     if (!response.ok) return alert(response.error);
-    navigate("/");
+    else navigate("/");
   });
+
+  const showOtherDrivers = watch("needDrivers");
+
+  // console.log(initialValues);
+
+  // useEffect(() => {
+  //   if (initialValues) {
+  //     setTimeout(() => {
+  //       setPickupGeometry(initialValues.pickupGeometry);
+  //       setPickupName(initialValues.pickupName);
+  //       setDropOffGeometry(initialValues.dropOffGeometry);
+  //       setDropOffName(initialValues.dropOffName);
+  //     }, 500);
+  //   }
+  // }, [initialValues]);
 
   return (
     <>
@@ -61,7 +105,7 @@ export const ConvoyForm: React.FC<Props> = ({ onAbort }) => {
                     <InputLocation
                       id="pickupName"
                       label="Adresse de départ du convoi"
-                      placeholder="Renseigner l'adresse de départ du convoi"
+                      placeholder="Ex : 9 avenue de l'horloge, 35300 Rennes"
                       value={pickupName}
                       onChange={setPickupName}
                       onChangeGeometry={setPickupGeometry}
@@ -69,29 +113,25 @@ export const ConvoyForm: React.FC<Props> = ({ onAbort }) => {
                   </div>
 
                   <div className="col-span-6 sm:col-span-3">
-                    <Input
-                      id="startDate"
-                      type="datetime-local"
-                      autoComplete="off"
-                      label="Heure de départ du convoi"
-                      placeholder="Renseigner l'heure de départ du convoi"
-                      register={register("startDate", { required: true })}
-                      error={errors.startDate}
+                    <InputLocation
+                      id="dropOffName"
+                      label="Ville d'arrivée du convoi"
+                      placeholder="Ex: Medyka, etc ..."
+                      value={dropOffName}
+                      onChange={setDropOffName}
+                      onChangeGeometry={setDropOffGeometry}
                     />
                   </div>
-                </div>
-                <div className="grid grid-cols-6 gap-6 mb-5">
+
                   <div className="col-span-6 sm:col-span-3">
                     <Input
-                      type="number"
-                      id="availableSeat"
+                      id="departure"
+                      type="datetime-local"
                       autoComplete="off"
-                      placeholder="Renseigner le nombre de place disponible dans le véhicule"
-                      label="Nombre de places disponibles"
-                      register={register("availableSeat", {
-                        required: true,
-                      })}
-                      error={errors.availableSeat}
+                      label="Date de départ du convoi"
+                      placeholder="Renseigner la date de départ du convoi"
+                      register={register("departure", { required: true })}
+                      error={errors.departure}
                     />
                   </div>
 
@@ -109,13 +149,77 @@ export const ConvoyForm: React.FC<Props> = ({ onAbort }) => {
                     />
                   </div>
                 </div>
+
+                <div className="grid grid-cols-6 gap-6 mb-5">
+                  <div className="col-span-6 sm:col-span-3 flex items-center">
+                    <Checkbox
+                      type="checkbox"
+                      id="needCollects"
+                      autoComplete="off"
+                      label="Je peux aller chercher des collectes proches"
+                      register={register("needCollects")}
+                      error={errors.needDrivers}
+                    />
+                  </div>
+                  <div className="col-span-6 sm:col-span-3 ">
+                    <Controller
+                      name="status"
+                      control={control}
+                      defaultValue={{ label: "En cours", value: "accepted" }}
+                      render={({ field }) => (
+                        <Dropdown
+                          label="Status du convoi"
+                          values={[
+                            { label: "En attente", value: "pending" },
+                            { label: "En cours", value: "accepted" },
+                            { label: "Annulée", value: "declined" },
+                            { label: "Sur la route", value: "delivering" },
+                            { label: "Livrée !", value: "completed" },
+                          ]}
+                          register={register("status")}
+                          error={errors.status}
+                          id="status"
+                          field={field}
+                        />
+                      )}
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-6 gap-6 mb-5">
+                  <div className="col-span-6 sm:col-span-3 flex items-center mt-5">
+                    <Checkbox
+                      type="checkbox"
+                      id="needDrivers"
+                      autoComplete="off"
+                      label="Je cherche d'autres chauffeurs"
+                      register={register("needDrivers")}
+                      error={errors.needDrivers}
+                    />
+                  </div>
+                  {showOtherDrivers && (
+                    <div className="col-span-6 sm:col-span-3">
+                      <Input
+                        type="number"
+                        id="availableSeat"
+                        autoComplete="off"
+                        placeholder="Renseigner le nombre de place disponible dans le véhicule"
+                        label="Nombre de places disponibles dans le véhicule"
+                        register={register("availableSeat", {
+                          required: true,
+                        })}
+                        error={errors.availableSeat}
+                      />
+                    </div>
+                  )}
+                </div>
+
                 {/* BESOIN */}
                 <div className="mb-5 pb-5 border-b border-dark">
                   <Textarea
                     id="needs"
                     rows={8}
-                    label="Volume disponible dans le véhicule"
-                    placeholder="Besoins"
+                    label="Besoins"
+                    placeholder="Nous cherchons un autre chauffeur, nous voulons transporter des affaires pour enfants etc ..."
                     register={register("needs")}
                     error={errors.needs}
                   />
@@ -165,6 +269,19 @@ export const ConvoyForm: React.FC<Props> = ({ onAbort }) => {
                     />
                   </div>
                 </div>
+                <div className="grid grid-cols-6 gap-6 mb-5">
+                  <div className="col-span-6 sm:col-span-3">
+                    <Input
+                      type="text"
+                      id="whatsappLink"
+                      autoComplete="off"
+                      placeholder="Lien du groupe whatsapp"
+                      label="Lien du groupe whatsapp"
+                      register={register("whatsappLink")}
+                      error={errors.whatsappLink}
+                    />
+                  </div>
+                </div>
               </div>
               <div className="flex justify-between">
                 <button
@@ -178,7 +295,7 @@ export const ConvoyForm: React.FC<Props> = ({ onAbort }) => {
                   type="submit"
                   className="inline-flex justify-center py-4 px-20 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
-                  Créer le convoi
+                  {isEditing ? "Modifier le convoi" : "Créer le convoi"}
                 </button>
               </div>
             </form>
