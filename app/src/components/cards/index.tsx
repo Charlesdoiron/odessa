@@ -1,5 +1,5 @@
 import { LocationMarkerIcon, UsersIcon, BriefcaseIcon } from "@heroicons/react/solid";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useWindowFocus from "use-window-focus";
 
 // Mocks
@@ -12,6 +12,7 @@ export const Cards = () => {
   const [error, setError] = useState<string | undefined>(undefined);
   const navigate = useNavigate();
   const windowFocused = useWindowFocus();
+  const location = useLocation();
 
   const refresh = () => {
     getConvoys().then((res) => {
@@ -21,8 +22,9 @@ export const Cards = () => {
   };
 
   useEffect(() => {
+    console.log("effect");
     if (windowFocused) refresh();
-  }, [windowFocused]);
+  }, [windowFocused, location.pathname]);
 
   if (!state) return <>Chargement ...</>;
   if (error) return <p>{error}</p>;
