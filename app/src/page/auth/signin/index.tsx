@@ -1,7 +1,11 @@
 import { LockClosedIcon } from "@heroicons/react/solid";
 
 export const Signin = () => {
-  return (
+  const onSubmit = (e: { preventDefault: () => void; }) => {
+    e.preventDefault()
+    console.log('submit');
+  }
+  return ( 
     <>
       {/*
         This example requires updating your template:
@@ -23,7 +27,7 @@ export const Signin = () => {
               Se connecter
             </h2>
           </div>
-          <form className="mt-8 space-y-6" action="#" method="POST">
+          <form className="mt-8 space-y-6" onSubmit={onSubmit}>
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="rounded-md shadow-sm -space-y-px">
               <div>

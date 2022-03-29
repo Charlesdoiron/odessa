@@ -170,8 +170,7 @@ router.post(
 );
 
 router.post(
-  "/",
-  passport.authenticate("user", { session: false }),
+  "/signup",
   catchErrors(async (req, res, next) => {
     try {
       z.string().min(1).parse(req.body.name);
