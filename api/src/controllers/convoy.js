@@ -15,6 +15,7 @@ router.get(
     if (req.query.hasOwnProperty("driverId")) query.driver = req.query.driverId;
     if (req.query.hasOwnProperty("minDate")) query.departure = { $gte: req.query.minDate };
     if (req.query.hasOwnProperty("maxDate")) query.departure = { $lte: req.query.minDate };
+
     if (req.query.hasOwnProperty("status")) query.status = { $in: req.query.status }; // array
     if (req.query.hasOwnProperty("coordinates")) {
       query.pickupGeometry = {
@@ -55,18 +56,20 @@ router.post(
   catchErrors(async (req, res, next) => {
     const newConvoy = {};
 
-    if (req.body.hasOwnProperty("departure")) newConvoy.departure = req.body.departure;
+    // if (req.body.hasOwnProperty("departure")) newConvoy.departure = req.body.departure;
     if (req.body.hasOwnProperty("pickupName")) newConvoy.pickupName = req.body.pickupName;
     if (req.body.hasOwnProperty("pickupGeometry")) newConvoy.pickupGeometry = req.body.pickupGeometry;
-    if (req.body.hasOwnProperty("dropoffName")) newConvoy.dropoffName = req.body.dropoffName;
-    if (req.body.hasOwnProperty("dropoffGeometry")) newConvoy.dropoffGeometry = req.body.dropoffGeometry;
-    if (req.body.hasOwnProperty("availableSeat")) newConvoy.availableSeat = req.body.availableSeat;
+    if (req.body.hasOwnProperty("dropOffName")) newConvoy.dropOffName = req.body.dropOffName;
+    if (req.body.hasOwnProperty("dropOffGeometry")) newConvoy.dropOffGeometry = req.body.dropOffGeometry;
+    if (req.body.hasOwnProperty("departure")) newConvoy.departure = req.body.departure;
     if (req.body.hasOwnProperty("availableVolume")) newConvoy.availableVolume = req.body.availableVolume;
+    if (req.body.hasOwnProperty("needDrivers")) newConvoy.needDrivers = req.body.needDrivers;
+    if (req.body.hasOwnProperty("availableSeat")) newConvoy.availableSeat = req.body.availableSeat;
+    if (req.body.hasOwnProperty("needCollects")) newConvoy.needCollects = req.body.needCollects;
     if (req.body.hasOwnProperty("needs")) newConvoy.needs = req.body.needs;
-    if (req.body.hasOwnProperty("driver")) newConvoy.driver = req.body.driver;
+    if (req.body.hasOwnProperty("name")) newConvoy.name = req.body.name;
     if (req.body.hasOwnProperty("email")) newConvoy.email = req.body.email;
     if (req.body.hasOwnProperty("phone")) newConvoy.phone = req.body.phone;
-    if (req.body.hasOwnProperty("name")) newConvoy.name = req.body.name;
     if (req.body.hasOwnProperty("whatsappLink")) newConvoy.whatsappLink = req.body.whatsappLink;
     if (req.body.hasOwnProperty("status")) newConvoy.status = req.body.status;
 
@@ -99,8 +102,8 @@ router.put(
     if (req.body.hasOwnProperty("departure")) updatedConvoy.departure = req.body.departure;
     if (req.body.hasOwnProperty("pickupName")) updatedConvoy.pickupName = req.body.pickupName;
     if (req.body.hasOwnProperty("pickupGeometry")) updatedConvoy.pickupGeometry = req.body.pickupGeometry;
-    if (req.body.hasOwnProperty("dropoffName")) updatedConvoy.dropoffName = req.body.dropoffName;
-    if (req.body.hasOwnProperty("dropoffGeometry")) updatedConvoy.dropoffGeometry = req.body.dropoffGeometry;
+    if (req.body.hasOwnProperty("dropOffName")) updatedConvoy.dropOffName = req.body.dropOffName;
+    if (req.body.hasOwnProperty("dropOffGeometry")) updatedConvoy.dropOffGeometry = req.body.dropOffGeometry;
     if (req.body.hasOwnProperty("availableSeat")) updatedConvoy.placesInCar = req.body.availableSeat;
     if (req.body.hasOwnProperty("availableVolume")) updatedConvoy.loadingVolume = req.body.availableVolume;
     if (req.body.hasOwnProperty("needs")) updatedConvoy.loadingVolume = req.body.needs;

@@ -2,6 +2,9 @@ const mongoose = require("mongoose");
 const dbConnection = require("../mongo");
 const MODELNAME = "Convoy";
 
+const PENDING = { label: "En attente", value: "pending" };
+const ACCEPTED = { label: "En cours", value: "accepted" };
+
 const locationSchema = new mongoose.Schema({
   type: {
     type: String, // Don't do `{ location: { type: String } }`
@@ -23,15 +26,17 @@ const Schema = new mongoose.Schema(
       type: locationSchema,
       index: "2dsphere",
     },
-    dropoffName: String,
-    dropoffGeometry: {
+    dropOffName: String,
+    dropOffGeometry: {
       type: locationSchema,
       index: "2dsphere",
     },
     availableSeat: Number,
-    availableVolume: String,
+    availableVolume: Number,
     needs: String,
-
+    needDrivers: Boolean,
+    availableSeat: Number,
+    needCollects: Boolean,
     // either a register user...
     driver: { type: mongoose.Types.ObjectId, ref: "user" },
     // ...or not
@@ -47,9 +52,8 @@ const Schema = new mongoose.Schema(
       lowercase: true,
     },
     name: { type: String },
-
     whatsappLink: String,
-    status: { type: String, enum: ["preparation", "loaded", "processing", "delivered"] },
+    status: { type: Object, enum: [PENDING | ACCEPTED] },
   },
   { timestamps: true }
 );

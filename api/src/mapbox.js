@@ -31,8 +31,8 @@ MAPBOX PLACES
 const MAPBOX_PLACES_BASE_URL = "https://api.mapbox.com/geocoding/v5/mapbox.places/";
 exports.getPlace = async (args) => execute({ baseUrl: MAPBOX_PLACES_BASE_URL, ...args }).then(({ features }) => features);
 
-exports.fetchByExpression = async ({ expression, proximity = "", language = "en", limit = "5", bbox = "", autocomplete = true }) => {
-  const options = { proximity, language, limit, bbox, autocomplete, country: "FR" };
+exports.fetchByExpression = async ({ expression, proximity = "", language = "fr", limit = "5", bbox = "", autocomplete = true }) => {
+  const options = { proximity, language, limit, bbox, autocomplete, country: ["FR", "UA", "PL"] };
   return this.getPlace({ path: `${encodeURI(expression)}.json?`, query: options });
 };
 
