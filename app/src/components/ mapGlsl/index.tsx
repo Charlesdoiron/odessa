@@ -11,7 +11,6 @@ import Map, {
 
 import { useParams } from "react-router-dom";
 
-import ControlPanel from "./control-panel";
 import Pin from "./pin";
 import { ConvoyType } from "typings";
 
@@ -134,8 +133,6 @@ export const CustomMap: React.FC<Props> = ({ data, zoom }) => {
           </Popup>
         )}
       </Map>
-
-      <ControlPanel />
     </>
   );
 };

@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { Menu, Popover, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import { SearchIcon } from "@heroicons/react/solid";
@@ -27,6 +27,10 @@ export const Layout = ({ children }: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { pathname } = location;
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [pathname]);
 
   if (pathname === "/connexion") {
     return (
