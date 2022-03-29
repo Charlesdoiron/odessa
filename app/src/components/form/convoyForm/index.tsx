@@ -30,15 +30,24 @@ interface Props {
   isEditing?: boolean;
 }
 
-export const ConvoyForm: React.FC<Props> = ({
-  onAbort,
-  initialValues,
-  isEditing,
-}) => {
-  const [pickupGeometry, setPickupGeometry] = useState(null);
-  const [pickupName, setPickupName] = useState(null);
-  const [dropOffGeometry, setDropOffGeometry] = useState(null);
-  const [dropOffName, setDropOffName] = useState(null);
+const formatInitialValues = (initialValues) => {
+  const formatted = {};
+  for (const key of Object.keys(initialValues)) {
+    if (["departure"].includes(key)) {
+      // hack to react-hook-form, I didn't find a better way yet
+      formatted[key] = new Date(initialValues[key]).toISOString().slice(0, 16);
+    } else {
+      formatted[key] = initialValues[key];
+    }
+  }
+  return formatted;
+};
+
+export const ConvoyForm: React.FC<Props> = ({ onAbort, initialValues, isEditing }) => {
+  const [pickupGeometry, setPickupGeometry] = useState(initialValues.pickupGeometry);
+  const [pickupName, setPickupName] = useState(initialValues.pickupName);
+  const [dropOffGeometry, setDropOffGeometry] = useState(initialValues.dropOffGeometry);
+  const [dropOffName, setDropOffName] = useState(initialValues.dropOffName);
   const navigate = useNavigate();
   const {
     register,
@@ -46,7 +55,7 @@ export const ConvoyForm: React.FC<Props> = ({
     formState: { errors },
     watch,
     control,
-  } = useForm({ defaultValues: initialValues });
+  } = useForm({ defaultValues: formatInitialValues(initialValues) });
 
   const onSubmit = handleSubmit(async (form) => {
     let response;
@@ -58,6 +67,8 @@ export const ConvoyForm: React.FC<Props> = ({
       dropOffName,
       dropOffGeometry,
     };
+
+    console.log(body);
 
     if (isEditing) {
       response = await API.put({
@@ -76,27 +87,12 @@ export const ConvoyForm: React.FC<Props> = ({
 
   const showOtherDrivers = watch("needDrivers");
 
-  // console.log(initialValues);
-
-  // useEffect(() => {
-  //   if (initialValues) {
-  //     setTimeout(() => {
-  //       setPickupGeometry(initialValues.pickupGeometry);
-  //       setPickupName(initialValues.pickupName);
-  //       setDropOffGeometry(initialValues.dropOffGeometry);
-  //       setDropOffName(initialValues.dropOffName);
-  //     }, 500);
-  //   }
-  // }, [initialValues]);
-
   return (
     <>
       <div>
         <div className=" w-full">
           <div className="bg-white space-y-6 sm:p-6 w-full">
-            <p className="text-[30px] font-bold text-dark inline-block">
-              Créer un
-            </p>
+            <p className="text-[30px] font-bold text-dark inline-block">Créer un</p>
             <p className="text-[30px] font-bold text-indigo-600 inline-block ml-2 underline">
               convoi
             </p>
@@ -108,7 +104,8 @@ export const ConvoyForm: React.FC<Props> = ({
                       id="pickupName"
                       label="Adresse de départ du convoi"
                       placeholder="Ex : 9 avenue de l'horloge, 35300 Rennes"
-                      value={pickupName}
+                      name={pickupName}
+                      geometry={pickupGeometry}
                       onChange={setPickupName}
                       onChangeGeometry={setPickupGeometry}
                     />
@@ -119,7 +116,8 @@ export const ConvoyForm: React.FC<Props> = ({
                       id="dropOffName"
                       label="Ville d'arrivée du convoi"
                       placeholder="Ex: Medyka, etc ..."
-                      value={dropOffName}
+                      name={dropOffName}
+                      geometry={dropOffGeometry}
                       onChange={setDropOffName}
                       onChangeGeometry={setDropOffGeometry}
                     />
@@ -286,17 +284,12 @@ export const ConvoyForm: React.FC<Props> = ({
                 </div>
               </div>
               <div className="flex justify-between">
-                <button
-                  onClick={onAbort}
-                  type="submit"
-                  className="text-dark underline"
-                >
+                <button onClick={onAbort} type="submit" className="text-dark underline">
                   Annuler
                 </button>
                 <button
                   type="submit"
-                  className="inline-flex justify-center py-4 px-20 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
+                  className="inline-flex justify-center py-4 px-20 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                   {isEditing ? "Modifier le convoi" : "Créer le convoi"}
                 </button>
               </div>

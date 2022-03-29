@@ -14,20 +14,19 @@ interface Props {
   onSelect?: any;
 }
 
-const initialChoices = [{ name: "", coordinates: {} }];
-
 // https://headlessui.dev/react/combobox
 export const InputLocation: React.FC<Props> = ({
   id,
   label,
   placeholder,
-  value,
+  name,
+  geometry,
   onChange,
   onChangeGeometry,
 }) => {
   const [expression, setExpression] = useState("");
-  const [choices, setChoices] = useState(initialChoices);
-  const [selected, setSelected] = useState(initialChoices[0]);
+  const [choices, setChoices] = useState([]);
+  const [selected, setSelected] = useState({ name, geometry });
 
   const timeout = useRef<ReturnType<typeof setTimeout>>(null);
   const canFetchChoices = useRef<boolean>(null);
@@ -80,7 +79,6 @@ export const InputLocation: React.FC<Props> = ({
       setQuery={setExpressionManually}
       query={expression}
       selected={selected}
-      value={value}
       onChange={setExpressionManually}
     />
   );

@@ -35,7 +35,6 @@ const Schema = new mongoose.Schema(
     availableVolume: Number,
     needs: String,
     needDrivers: Boolean,
-    availableSeat: Number,
     needCollects: Boolean,
     // either a register user...
     driver: { type: mongoose.Types.ObjectId, ref: "user" },
