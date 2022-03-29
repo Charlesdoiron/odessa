@@ -20,6 +20,8 @@ import { Dropdown } from "../inputs/dropdown";
 //   lastName: string;
 //   email: string;
 //   phone: string;
+//   email: string;
+//   phone: string;
 // }
 
 interface Props {
