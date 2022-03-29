@@ -69,7 +69,7 @@ router.post(
       error.status = 400;
       return next(error);
     }
-
+    console.log('req.body :>> ', req.body);
     let { password, email } = req.body;
     if (!password || !email) return res.status(400).send({ ok: false, error: "Missing password" });
     email = (email || "").trim().toLowerCase();

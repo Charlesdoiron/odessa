@@ -33,13 +33,14 @@ export const Layout = ({ children }: Props) => {
       current: true,
     },
   ];
-  if (pathname === "/connexion") {
+  if (pathname === "/connexion" || pathname === "/inscription") {
     return (
       <div className="h-[100vh] flex items-center justify-center">
         {children}
       </div>
     );
   }
+
 
   return (
     <>

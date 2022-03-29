@@ -17,6 +17,7 @@ import API from "services/api";
 import { HospitalityCreate } from "page/hospitality/create";
 import { Hospitality } from "page/hospitality";
 import { Signin } from "page/auth/signin";
+import { Signup } from "page/auth/signup";
 
 const test = async () => {
   const response = await API.get({
@@ -47,6 +48,7 @@ const App: React.FC = () => {
           <Route path="/hospitality/:id" element={<Hospitality />}></Route>
           <Route path="/driver-create" element={<DriverCreate />}></Route>
           <Route path="/map" element={<Home />}></Route>
+          <Route path="/inscription" element={<Signup />}></Route>
           <Route path="/connexion" element={<Signin />}></Route>
         </Routes>
       </Layout>
