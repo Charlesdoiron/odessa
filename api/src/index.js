@@ -36,6 +36,7 @@ app.use("/user", require("./controllers/user"));
 app.use("/location", require("./controllers/location"));
 app.use("/convoy", require("./controllers/convoy"));
 app.use("/collect", require("./controllers/collect"));
+app.use("/picture", require("./controllers/picture"));
 
 app.use(errors.sendError);
 

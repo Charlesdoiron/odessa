@@ -63,6 +63,30 @@ class ApiService {
   get = async (args) => this.execute({ method: "GET", ...args });
   put = (args) => this.execute({ method: "PUT", ...args });
   delete = (args) => this.execute({ method: "DELETE", ...args });
+
+  uploadFile(path, files) {
+    let formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      formData.append(files[i].name, files[i], files[i].name);
+    }
+    return new Promise((resolve, reject) => {
+      try {
+        fetch(this.getUrl({ path }), {
+          retries: 3,
+          retryDelay: 1000,
+          retryOn: [502, 503, 504],
+          mode: "cors",
+          method: "POST",
+          credentials: "include",
+          body: formData,
+        })
+          .then((res) => res.json())
+          .then(resolve);
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
 }
 
 const API = new ApiService();
