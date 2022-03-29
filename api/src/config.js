@@ -12,6 +12,10 @@ const MAPBOX_API_TOKEN = process.env.MAPBOX_API_TOKEN;
 
 const CORS_ORIGIN_ALLOWED = [APP_URL, "https://odessafront.vercel.app/"];
 
+const CELLAR_ADDON_HOST = process.env.CELLAR_ADDON_HOST;
+const CELLAR_ADDON_KEY_ID = process.env.CELLAR_ADDON_KEY_ID;
+const CELLAR_ADDON_KEY_SECRET = process.env.CELLAR_ADDON_KEY_SECRET;
+
 module.exports = {
   PORT,
   SECRET,
@@ -23,4 +27,7 @@ module.exports = {
   APP_URL,
   APP_NAME,
   MAPBOX_API_TOKEN,
+  CELLAR_ADDON_HOST,
+  CELLAR_ADDON_KEY_ID,
+  CELLAR_ADDON_KEY_SECRET,
 };
