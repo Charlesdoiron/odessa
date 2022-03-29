@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const dbConnection = require("../mongo");
 const MODELNAME = "User";
+const bcrypt = require("bcryptjs");
 
 const Schema = new mongoose.Schema(
   {

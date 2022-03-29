@@ -176,17 +176,17 @@ router.post(
       z.string().min(1).parse(req.body.name);
       z.optional(z.string().min(1)).parse(req.body.phone);
       z.string().email().parse(req.body.email);
-      z.string().min(1).parse(req.body.newPassword);
-      z.string().min(1).parse(req.body.verifyPassword);
+      z.string().min(1).parse(req.body.password);
+      z.string().min(1).parse(req.body.confirmPassword);
     } catch (e) {
       const error = new Error(`Invalid request in user creation: ${e}`);
       error.status = 400;
       return next(error);
     }
 
-    const { name, email, phone, password, verifyPassword } = req.body;
-
-    if (password !== verifyPassword) return res.status(400).send({ ok: false, error: "Les mots de passe ne sont pas identiques" });
+    const { name, email, phone, password, confirmPassword } = req.body;
+ 
+    if (password !== confirmPassword) return res.status(400).send({ ok: false, error: "Les mots de passe ne sont pas identiques" });
     if (!validatePassword(password)) return res.status(400).send({ ok: false, error: passwordCheckError, code: PASSWORD_NOT_VALIDATED });
 
     const newUser = {
@@ -195,6 +195,7 @@ router.post(
       phone: phone.trim().toLowerCase(),
       password,
     };
+   
 
     const prevUser = await UserModel.findOne({ email: newUser.email });
     if (prevUser) return res.status(400).send({ ok: false, error: "A user already exists with this email" });
