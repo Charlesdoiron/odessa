@@ -8562,6 +8562,11 @@ urijs@^1.19.10:
   resolved "https://registry.yarnpkg.com/urijs/-/urijs-1.19.10.tgz#8e2fe70a8192845c180f75074884278f1eea26cb"
   integrity sha512-EzauQlgKuJgsXOqoMrCiePBf4At5jVqRhXykF3Wfb8ZsOBMxPcfiVBcsHXug4Aepb/ICm2PIgqAUGMelgdrWEg==
 
+use-window-focus@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/use-window-focus/-/use-window-focus-1.4.0.tgz#1c2e318d600daf4e5c23a59d3117546d71e45e24"
+  integrity sha512-nukGk7GklW0/xUkyRnWr+835Q4C9hI29GvUGrpo2GzwtbgsUUp1K/MD4WDaI3977sh9rJq2XhDQ41T8VZiohgw==
+
 util-deprecate@^1.0.1, util-deprecate@^1.0.2, util-deprecate@~1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
