@@ -5,6 +5,7 @@ import { SearchIcon } from "@heroicons/react/solid";
 import { Cards } from "components/cards";
 import classNames from "services/classNames";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Filters } from "components/filters";
 
 const user = {
   name: "Charles d'Oiron",
@@ -26,13 +27,7 @@ export const Layout = ({ children }: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { pathname } = location;
-  const navigation = [
-    {
-      name: "Afficher la carte",
-      onClick: () => navigate("/"),
-      current: true,
-    },
-  ];
+
   if (pathname === "/connexion") {
     return (
       <div className="h-[100vh] flex items-center justify-center">
@@ -50,8 +45,30 @@ export const Layout = ({ children }: Props) => {
               <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 ">
                 <div className="relative py-5 flex items-center justify-center lg:justify-between">
                   {/* Logo */}
-                  <div className="absolute left-0 flex-shrink-0 lg:static">
+                  <div
+                    className="absolute left-0 flex-shrink-0 lg:static hover:cursor-pointer"
+                    onClick={() => navigate("/")}
+                  >
                     🇺🇦
+                  </div>
+                  <div className="w-full ml-10">
+                    <div className="">
+                      <label htmlFor="mobile-search" className="sr-only">
+                        Rechercher par adresse / ville
+                      </label>
+                      <div className="relative text-white focus-within:text-gray-600">
+                        <div className="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
+                          <SearchIcon className="h-5 w-5" aria-hidden="true" />
+                        </div>
+                        <input
+                          id="mobile-search"
+                          className="block w-full bg-white bg-opacity-20 py-5 pl-10 pr-3 border border-transparent rounded-md leading-5 text-gray-900 placeholder-white focus:outline-none focus:bg-opacity-100 focus:border-transparent focus:placeholder-gray-500 focus:ring-0 sm:text-sm"
+                          placeholder="Rechercher par adresse / ville"
+                          type="search"
+                          name="search"
+                        />
+                      </div>
+                    </div>
                   </div>
 
                   {/* Right section on desktop */}
@@ -59,7 +76,7 @@ export const Layout = ({ children }: Props) => {
                     <Link
                       to="/convoy-create"
                       type="button"
-                      className="flex-shrink-0 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5"
+                      className="flex-shrink-0 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5 py-5"
                     >
                       Je crée un convoi
                     </Link>
@@ -161,48 +178,8 @@ export const Layout = ({ children }: Props) => {
                     </Popover.Button>
                   </div>
                 </div>
-                <div className="hidden lg:block border-t border-white border-opacity-20 py-5">
-                  <div className="grid grid-cols-3 gap-8 items-center">
-                    <div className="col-span-2">
-                      <nav className="flex space-x-4">
-                        {navigation.map((item) => (
-                          <button
-                            key={item.name}
-                            onClick={item.onClick}
-                            className={classNames(
-                              item.current ? "text-white" : "text-indigo-100",
-                              "text-sm font-medium rounded-md bg-white bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
-                            )}
-                            aria-current={item.current ? "page" : undefined}
-                          >
-                            {item.name}
-                          </button>
-                        ))}
-                      </nav>
-                    </div>
-                    <div>
-                      <div className="">
-                        <label htmlFor="mobile-search" className="sr-only">
-                          Rechercher par adresse / ville
-                        </label>
-                        <div className="relative text-white focus-within:text-gray-600">
-                          <div className="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
-                            <SearchIcon
-                              className="h-5 w-5"
-                              aria-hidden="true"
-                            />
-                          </div>
-                          <input
-                            id="mobile-search"
-                            className="block w-full bg-white bg-opacity-20 py-5 pl-10 pr-3 border border-transparent rounded-md leading-5 text-gray-900 placeholder-white focus:outline-none focus:bg-opacity-100 focus:border-transparent focus:placeholder-gray-500 focus:ring-0 sm:text-sm"
-                            placeholder="Rechercher par adresse / ville"
-                            type="search"
-                            name="search"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <div className="hidden lg:block border-t border-white border-opacity-20 ">
+                  <Filters />
                 </div>
               </div>
 

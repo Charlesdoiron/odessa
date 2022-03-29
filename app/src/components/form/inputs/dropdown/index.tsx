@@ -8,7 +8,7 @@ interface Props {
   values: Item[];
   label: string;
   id: string;
-  error: string;
+  error?: string;
   field: {
     onChange: (event: any) => void;
     value: Item;
