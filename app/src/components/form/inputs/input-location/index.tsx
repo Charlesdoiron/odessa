@@ -26,7 +26,7 @@ export const InputLocation: React.FC<Props> = ({
 }) => {
   const [expression, setExpression] = useState("");
   const [choices, setChoices] = useState([]);
-  const [selected, setSelected] = useState({ name, geometry });
+  const [selected, setSelected] = useState({ name: name || "", geometry: geometry || {} });
 
   const timeout = useRef<ReturnType<typeof setTimeout>>(null);
   const canFetchChoices = useRef<boolean>(null);

@@ -30,7 +30,8 @@ interface Props {
   isEditing?: boolean;
 }
 
-const formatInitialValues = (initialValues) => {
+const formatInitialValues = (initialValues = {}) => {
+  if (!initialValues) return null;
   const formatted = {};
   for (const key of Object.keys(initialValues)) {
     if (["departure"].includes(key)) {
@@ -44,10 +45,10 @@ const formatInitialValues = (initialValues) => {
 };
 
 export const ConvoyForm: React.FC<Props> = ({ onAbort, initialValues, isEditing }) => {
-  const [pickupGeometry, setPickupGeometry] = useState(initialValues.pickupGeometry);
-  const [pickupName, setPickupName] = useState(initialValues.pickupName);
-  const [dropOffGeometry, setDropOffGeometry] = useState(initialValues.dropOffGeometry);
-  const [dropOffName, setDropOffName] = useState(initialValues.dropOffName);
+  const [pickupGeometry, setPickupGeometry] = useState(initialValues?.pickupGeometry);
+  const [pickupName, setPickupName] = useState(initialValues?.pickupName);
+  const [dropOffGeometry, setDropOffGeometry] = useState(initialValues?.dropOffGeometry);
+  const [dropOffName, setDropOffName] = useState(initialValues?.dropOffName);
   const navigate = useNavigate();
   const {
     register,
@@ -67,8 +68,6 @@ export const ConvoyForm: React.FC<Props> = ({ onAbort, initialValues, isEditing 
       dropOffName,
       dropOffGeometry,
     };
-
-    console.log(body);
 
     if (isEditing) {
       response = await API.put({
