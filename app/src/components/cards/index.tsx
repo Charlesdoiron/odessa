@@ -4,27 +4,39 @@ import useWindowFocus from "use-window-focus";
 
 // Mocks
 import { useEffect, useState } from "react";
-import { getConvoys } from "call/convoy";
 import { ConvoyType } from "typings";
+import API from "services/api";
 
 export const Cards = () => {
   const [state, setState] = useState<ConvoyType[] | null>(null);
   const [error, setError] = useState<string | undefined>(undefined);
-  const searchParams = useSearchParams();
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const windowFocused = useWindowFocus();
   const location = useLocation();
 
-  const refresh = () => {
-    getConvoys().then((res) => {
-      if (res.ok) setState(res.data);
-      else setError(res.error);
+  const refresh = async () => {
+    const response = await API.get({
+      path: `/${searchParams.get("type")}`,
     });
+    if (response.ok) {
+      setState(response.data);
+    } else {
+      setError(response.error);
+    }
   };
 
   useEffect(() => {
-    if (windowFocused) refresh();
+    if (windowFocused) {
+      refresh();
+    }
   }, [windowFocused, location.pathname, searchParams]);
+
+  useEffect(() => {
+    if (!state) {
+      refresh();
+    }
+  }, [state]);
 
   if (!state) return <>Chargement ...</>;
   if (error) return <p>{error}</p>;

@@ -6,6 +6,11 @@ type ConvoysRes = {
   ok: boolean;
   error?: string;
 };
+export type AnyRes = {
+  data: ConvoyType[];
+  ok: boolean;
+  error?: string;
+};
 type ConvoyRes = {
   data: ConvoyType;
   ok: boolean;

@@ -11,6 +11,7 @@ router.get(
   // passport.authenticate("user", { session: false }),
   catchErrors(async (req, res) => {
     const query = {};
+    console.log(req.query);
     if (req.query.hasOwnProperty("title")) query.title = { $in: req.query.title };
     if (req.query.hasOwnProperty("driverId")) query.driver = req.query.driverId;
     if (req.query.hasOwnProperty("minDate")) query.departure = { $gte: req.query.minDate };
