@@ -26,7 +26,8 @@
     "redux-observable": "^2.0.0",
     "typescript": "^4.6.2",
     "urijs": "^1.19.10",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "zustand": "^3.7.1"
   },
   "scripts": {
     "start": "react-scripts start",

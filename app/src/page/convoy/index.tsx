@@ -2,20 +2,19 @@ import { getConvoy } from "call/convoy";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ConvoyType } from "typings";
+import React from "react";
 
 export const Convoy: React.FC = () => {
   const [state, setState] = useState<ConvoyType | null>(null);
   const [error, setError] = useState<string | undefined>(undefined);
 
   const { id } = useParams<{ id: string }>();
-
   useEffect(() => {
     getConvoy(id).then((res) => {
       if (res?.ok) setState(res.data);
       else setError(res?.error);
     });
   }, [id]);
-
   if (!state) return <></>;
   if (error) return <p>{error}</p>;
   return (

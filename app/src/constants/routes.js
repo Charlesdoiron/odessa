@@ -1,2 +1,2 @@
-export const SIGNIN_ROUTE = '/connexion';
-export const SIGNUP_ROUTE = '/inscription';
+export const LOGIN_ROUTE = "/connexion";
+export const SIGNIN_ROUTE = "/inscription";

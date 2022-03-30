@@ -9,12 +9,12 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getConvoys } from "call/convoy";
 import { ConvoyType } from "typings";
+import React from "react";
 
 export const Cards = () => {
   const [state, setState] = useState<ConvoyType[] | null>(null);
   const [error, setError] = useState<string | undefined>(undefined);
   const navigate = useNavigate();
-
   useEffect(() => {
     getConvoys().then((res) => {
       if (res.ok) setState(res.data);

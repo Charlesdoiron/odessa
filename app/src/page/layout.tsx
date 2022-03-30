@@ -5,7 +5,8 @@ import { SearchIcon } from "@heroicons/react/solid";
 import { Cards } from "components/cards";
 import classNames from "services/classNames";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { SIGNIN_ROUTE, SIGNUP_ROUTE } from "constants/routes";
+import { SIGNIN_ROUTE, LOGIN_ROUTE } from "constants/routes";
+import { useCount } from "context/user-context";
 
 const user = {
   name: "Charles d'Oiron",
@@ -34,7 +35,9 @@ export const Layout = ({ children }: Props) => {
       current: true,
     },
   ];
-  if (pathname.includes(SIGNIN_ROUTE) || pathname.includes(SIGNUP_ROUTE)) {
+
+  const { state } = useCount();
+  if (pathname.includes(SIGNIN_ROUTE) || pathname.includes(LOGIN_ROUTE)) {
     return (
       <div className="h-[100vh] flex items-center justify-center">
         {children}
@@ -42,6 +45,7 @@ export const Layout = ({ children }: Props) => {
     );
   }
 
+  console.log(state);
 
   return (
     <>
@@ -53,7 +57,7 @@ export const Layout = ({ children }: Props) => {
                 <div className="relative py-5 flex items-center justify-center lg:justify-between">
                   {/* Logo */}
                   <div className="absolute left-0 flex-shrink-0 lg:static">
-                    🇺🇦
+                    🇺🇦 {state.user?.name}
                   </div>
 
                   {/* Right section on desktop */}

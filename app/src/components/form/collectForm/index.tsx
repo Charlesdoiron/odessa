@@ -32,6 +32,7 @@ export const CollectForm: React.FC<Props> = ({ onAbort, setStep }) => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const onSubmit = handleSubmit(async (form) => {
     const response = await API.post({
       path: "/collect",
