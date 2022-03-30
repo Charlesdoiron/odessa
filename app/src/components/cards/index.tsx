@@ -5,6 +5,7 @@ import {
 } from "@heroicons/react/solid";
 import { useLocation, useNavigate } from "react-router-dom";
 import useWindowFocus from "use-window-focus";
+import { useTranslation } from 'react-i18next';
 
 // Mocks
 import { useEffect, useState } from "react";
@@ -12,6 +13,8 @@ import { getConvoys } from "call/convoy";
 import { ConvoyType } from "typings";
 
 export const Cards = () => {
+  const { t } = useTranslation();
+
   const [state, setState] = useState<ConvoyType[] | null>(null);
   const [error, setError] = useState<string | undefined>(undefined);
   const navigate = useNavigate();
@@ -29,7 +32,7 @@ export const Cards = () => {
     if (windowFocused) refresh();
   }, [windowFocused, location.pathname]);
 
-  if (!state) return <>Chargement ...</>;
+  if (!state) return <>{t('app.loading')}</>;
   if (error) return <p>{error}</p>;
 
   return (
@@ -72,7 +75,7 @@ export const Cards = () => {
                             : "bg-yellow-100 text-yellow-800"
                         }`}
                       >
-                        Convoi - {status?.label.toLowerCase()}
+                        {t('cards.convoy')} - {status?.label.toLowerCase()}
                       </p>
                     </div>
                   </div>
@@ -103,7 +106,8 @@ export const Cards = () => {
                           className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
                           aria-hidden="true"
                         />
-                        {availableVolume}% plein
+                    
+                        {availableVolume}% {t('cards.full')}
                       </p>
                     </div>
                   </div>

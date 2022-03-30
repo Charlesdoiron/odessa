@@ -1,0 +1,24 @@
+{
+    "fr": {
+      "translation": {
+        "cards": {
+          "convoy": "Convoi",
+          "full": "plein"
+        },
+        "app": {
+          "loading": "Chargement ..."
+        }
+      }
+    },
+    "en": {
+      "translation": {
+        "cards": {
+          "convoy": "Convoy",
+          "full": "full"
+        },
+        "app": {
+          "loading": "Loading ..."
+        }
+      }
+    }
+}
