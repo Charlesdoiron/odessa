@@ -5,6 +5,7 @@ import { SearchIcon } from "@heroicons/react/solid";
 import { Cards } from "components/cards";
 import classNames from "services/classNames";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { SIGNIN_ROUTE, SIGNUP_ROUTE } from "constants/routes";
 
 const user = {
   name: "Charles d'Oiron",
@@ -33,7 +34,7 @@ export const Layout = ({ children }: Props) => {
       current: true,
     },
   ];
-  if (pathname === "/connexion" || pathname === "/inscription") {
+  if (pathname.includes(SIGNIN_ROUTE) || pathname.includes(SIGNUP_ROUTE)) {
     return (
       <div className="h-[100vh] flex items-center justify-center">
         {children}

@@ -1,6 +1,6 @@
 import { LockClosedIcon } from "@heroicons/react/solid";
 import { signin } from "call/auth";
-export const Signin = () => {
+export const Signin: React.FC  = () => {
   const onSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault()
     console.log('submit');

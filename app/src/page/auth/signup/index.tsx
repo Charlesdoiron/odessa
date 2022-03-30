@@ -3,21 +3,26 @@ import { signup } from "call/auth";
 import { signupInputsData } from './utills';
 import { SignupBody } from "call/auth";
 
-export const Signup = () => {
+export const Signup: React.FC  = () => {
   const [signupState, setSignupState] = useState<SignupBody>({});
+  const [error, setError] = useState(null);
+
   const onSignupInputsChange = (e: any) => {
     setSignupState({...signupState, [e.target.name]: e.target.value})
-  }
+  };
 
   const onSubmit = (e: { preventDefault: () => void; }) => {
-    e.preventDefault()
-    console.log('submit');
-    signup(signupState).then((res) => console.log(res ,'res'));
-  }
+    e.preventDefault();
+    signup(signupState).then((res) => {
+      if (res.ok) console.log(res);
+      else setError(res.error);
+    });
+  };
  
   return ( 
     <>
       <div className="min-h-full flex items-center justify-center md:w-2/6 sm:w-3/6 w-full mx-10 md:mx-0 md:min-w-[500px] ">
+        
         <div className=" w-full space-y-8">
           <div>
             <img
@@ -29,12 +34,13 @@ export const Signup = () => {
               S'inscrire
             </h2>
           </div>
+          {error && <p style={{ color: 'red', textAlign: 'center' }}>{error}</p>}
           <form className="mt-8 space-y-6" onSubmit={onSubmit}>
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="rounded-md shadow-sm -space-y-px">
               {signupInputsData.map(({id, name, type, placeholder}) => {
                 return(
-                  <div>
+                  <div key={id}>
                     <input
                       onChange={onSignupInputsChange}
                       style={{ padding: "20px" }}
