@@ -4,6 +4,9 @@ const MODELNAME = "Convoy";
 
 const PENDING = { label: "En attente", value: "pending" };
 const ACCEPTED = { label: "En cours", value: "accepted" };
+const CANCELED = { label: "Annulé", value: "canceled" };
+const DELIVERING = { label: "Sur la route", value: "delivering" };
+const COMPLETED = { label: "Livrée !", value: "completed" };
 
 const locationSchema = new mongoose.Schema({
   type: {
@@ -20,6 +23,7 @@ const locationSchema = new mongoose.Schema({
 
 const Schema = new mongoose.Schema(
   {
+    title: String,
     departure: Date,
     pickupName: String,
     pickupGeometry: {
@@ -52,7 +56,7 @@ const Schema = new mongoose.Schema(
     },
     name: { type: String },
     whatsappLink: String,
-    status: { type: Object, enum: [PENDING | ACCEPTED] },
+    status: { type: Object, enum: [PENDING | ACCEPTED | CANCELED | DELIVERING | COMPLETED] },
   },
   { timestamps: true }
 );

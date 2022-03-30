@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 const dbConnection = require("../mongo");
 const MODELNAME = "Collect";
 
+const PENDING = { label: "En attente", value: "pending" };
+const ACCEPTED = { label: "En cours", value: "accepted" };
+const CANCELED = { label: "Annulé", value: "canceled" };
+const COMPLETED = { label: "Chargée !", value: "completed" };
+
 const locationSchema = new mongoose.Schema({
   type: {
     type: String, // Don't do `{ location: { type: String } }`
@@ -17,6 +22,7 @@ const locationSchema = new mongoose.Schema({
 
 const Schema = new mongoose.Schema(
   {
+    title: String,
     date: Date,
     pickupName: String,
     pickupGeometry: {
@@ -40,9 +46,8 @@ const Schema = new mongoose.Schema(
       lowercase: true,
     },
     name: { type: String },
-
     whatsappLink: String,
-    status: { type: String, enum: ["preparation", "ongoing", "completed"] },
+    status: { type: Object, enum: [PENDING, ACCEPTED, CANCELED, COMPLETED] },
   },
   { timestamps: true }
 );

@@ -12,6 +12,7 @@ router.get(
   catchErrors(async (req, res) => {
     const query = {};
 
+    if (req.query.hasOwnProperty("title")) query.title = { $in: req.query.title };
     if (req.query.hasOwnProperty("userId")) query.user = req.query.userId;
     if (req.query.hasOwnProperty("minDate")) query.date = { $gte: req.query.minDate };
     if (req.query.hasOwnProperty("maxDate")) query.date = { $lte: req.query.minDate };
@@ -54,7 +55,7 @@ router.post(
   // passport.authenticate("user", { session: false }),
   catchErrors(async (req, res, next) => {
     const newCollect = {};
-
+    if (req.body.hasOwnProperty("title")) newCollect.title = req.body.title;
     if (req.body.hasOwnProperty("departure")) newCollect.departure = req.body.departure;
     if (req.body.hasOwnProperty("pickupName")) newCollect.pickupName = req.body.pickupName;
     if (req.body.hasOwnProperty("pickupGeometry")) newCollect.pickupGeometry = req.body.pickupGeometry;
@@ -92,7 +93,7 @@ router.put(
     if (!existingCollect) return res.status(400).send({ ok: false, error: "Convoy not existing" });
 
     const updatedCollect = {};
-
+    if (req.body.hasOwnProperty("title")) updatedCollect.title = req.body.title;
     if (req.body.hasOwnProperty("departure")) updatedCollect.departure = req.body.departure;
     if (req.body.hasOwnProperty("pickupName")) updatedCollect.pickupName = req.body.pickupName;
     if (req.body.hasOwnProperty("pickupGeometry")) updatedCollect.pickupGeometry = req.body.pickupGeometry;

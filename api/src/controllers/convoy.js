@@ -11,7 +11,7 @@ router.get(
   // passport.authenticate("user", { session: false }),
   catchErrors(async (req, res) => {
     const query = {};
-
+    if (req.query.hasOwnProperty("title")) query.title = { $in: req.query.title };
     if (req.query.hasOwnProperty("driverId")) query.driver = req.query.driverId;
     if (req.query.hasOwnProperty("minDate")) query.departure = { $gte: req.query.minDate };
     if (req.query.hasOwnProperty("maxDate")) query.departure = { $lte: req.query.minDate };
@@ -55,7 +55,7 @@ router.post(
   // passport.authenticate("user", { session: false }),
   catchErrors(async (req, res, next) => {
     const newConvoy = {};
-
+    if (req.body.hasOwnProperty("title")) newConvoy.title = req.body.title;
     if (req.body.hasOwnProperty("departure")) newConvoy.departure = req.body.departure;
     if (req.body.hasOwnProperty("pickupName")) newConvoy.pickupName = req.body.pickupName;
     if (req.body.hasOwnProperty("pickupGeometry")) newConvoy.pickupGeometry = req.body.pickupGeometry;
@@ -98,7 +98,7 @@ router.put(
     if (!existingConvoy) return res.status(400).send({ ok: false, error: "Convoy not existing" });
 
     const updatedConvoy = {};
-
+    if (req.body.hasOwnProperty("title")) updatedConvoy.title = req.body.title;
     if (req.body.hasOwnProperty("departure")) updatedConvoy.departure = req.body.departure;
     if (req.body.hasOwnProperty("pickupName")) updatedConvoy.pickupName = req.body.pickupName;
     if (req.body.hasOwnProperty("pickupGeometry")) updatedConvoy.pickupGeometry = req.body.pickupGeometry;
