@@ -16,11 +16,14 @@ export const Stepper: React.FC<Props> = ({ onAbort }) => {
   const renderStep = () => {
     switch (step) {
       case "start":
-        return <Start onAbort={onAbort} setStep={(newStep: StepStatus) => setStep(newStep)} />;
-      case "form":
         return (
-          <CollectForm onAbort={onAbort} setStep={(newStep: StepStatus) => setStep(newStep)} />
+          <Start
+            onAbort={onAbort}
+            setStep={(newStep: StepStatus) => setStep(newStep)}
+          />
         );
+      case "form":
+        return <CollectForm onAbort={onAbort} />;
       case "prohibided":
         return <NoConvoyFound />;
       case "success":

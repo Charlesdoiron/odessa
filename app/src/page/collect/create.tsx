@@ -11,7 +11,7 @@ export const CollectCreate = () => {
       </h2>
       <div className="rounded-lg bg-white overflow-hidden shadow">
         <div className="p-6">
-          <CollectForm onAbort={() => navigate("/")} setStep={console.log} />
+          <CollectForm onAbort={() => navigate("/")} />
         </div>
       </div>
     </section>

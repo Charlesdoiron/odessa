@@ -10,20 +10,6 @@ import { useState } from "react";
 import { InputLocation } from "../inputs/input-location";
 import { Dropdown } from "../inputs/dropdown";
 
-// interface FormValues {
-//   adress: string;
-//   startDate: string;
-//   availableSeat: string;
-//   availableVolume: string;
-//   needs: string;
-//   firstName: string;
-//   lastName: string;
-//   email: string;
-//   phone: string;
-//   email: string;
-//   phone: string;
-// }
-
 interface Props {
   onAbort: () => void;
   initialValues?: ConvoyType | null;
@@ -44,10 +30,18 @@ const formatInitialValues = (initialValues = {}) => {
   return formatted;
 };
 
-export const ConvoyForm: React.FC<Props> = ({ onAbort, initialValues, isEditing }) => {
-  const [pickupGeometry, setPickupGeometry] = useState(initialValues?.pickupGeometry);
+export const ConvoyForm: React.FC<Props> = ({
+  onAbort,
+  initialValues,
+  isEditing,
+}) => {
+  const [pickupGeometry, setPickupGeometry] = useState(
+    initialValues?.pickupGeometry
+  );
   const [pickupName, setPickupName] = useState(initialValues?.pickupName);
-  const [dropOffGeometry, setDropOffGeometry] = useState(initialValues?.dropOffGeometry);
+  const [dropOffGeometry, setDropOffGeometry] = useState(
+    initialValues?.dropOffGeometry
+  );
   const [dropOffName, setDropOffName] = useState(initialValues?.dropOffName);
   const navigate = useNavigate();
   const {
@@ -91,12 +85,26 @@ export const ConvoyForm: React.FC<Props> = ({ onAbort, initialValues, isEditing 
       <div>
         <div className=" w-full">
           <div className="bg-white space-y-6 sm:p-6 w-full">
-            <p className="text-[30px] font-bold text-dark inline-block">Créer un</p>
+            <p className="text-[30px] font-bold text-dark inline-block">
+              Créer un
+            </p>
             <p className="text-[30px] font-bold text-indigo-600 inline-block ml-2 underline">
               convoi
             </p>
             <form onSubmit={onSubmit}>
               <div className=" bg-white ">
+                <div className="w-full mb-5">
+                  <div className="col-span-12 sm:col-span-3">
+                    <Input
+                      type="text"
+                      id="title"
+                      label="Titre de mon convoi"
+                      placeholder="Le convoi des Lilas (Pour retrouver / partager facilement le convoi)"
+                      register={register("title", { required: true })}
+                      error={errors.title}
+                    />
+                  </div>
+                </div>
                 <div className="grid grid-cols-6 gap-6 mb-5 ">
                   <div className="col-span-6 sm:col-span-3">
                     <InputLocation
@@ -171,7 +179,7 @@ export const ConvoyForm: React.FC<Props> = ({ onAbort, initialValues, isEditing 
                           values={[
                             { label: "En attente", value: "pending" },
                             { label: "En cours", value: "accepted" },
-                            { label: "Annulée", value: "declined" },
+                            { label: "Annulée", value: "canceled" },
                             { label: "Sur la route", value: "delivering" },
                             { label: "Livrée !", value: "completed" },
                           ]}
@@ -283,12 +291,17 @@ export const ConvoyForm: React.FC<Props> = ({ onAbort, initialValues, isEditing 
                 </div>
               </div>
               <div className="flex justify-between">
-                <button onClick={onAbort} type="submit" className="text-dark underline">
+                <button
+                  onClick={onAbort}
+                  type="submit"
+                  className="text-dark underline"
+                >
                   Annuler
                 </button>
                 <button
                   type="submit"
-                  className="inline-flex justify-center py-4 px-20 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                  className="inline-flex justify-center py-4 px-20 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
                   {isEditing ? "Modifier le convoi" : "Créer le convoi"}
                 </button>
               </div>

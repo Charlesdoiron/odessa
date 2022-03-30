@@ -32,30 +32,14 @@ export const SubFilters: React.FC<Props> = ({ parentFilter }) => {
     },
   ];
 
-  const housing = [
-    {
-      label: "наявний зараз",
-      value: "availableNow",
-    },
-    {
-      label: "На 4 особи",
-      value: "fourPeople",
-    },
-    {
-      label: "біля школи",
-      value: "neerSchool",
-    },
-  ];
   const renderSubFilters = () => {
     switch (parentFilter) {
       case "convoy":
         return convoyFilters;
       case "availableSeat":
         return availableSeat;
-      case "housing":
-        return housing;
       default:
-        return housing;
+        return [];
     }
   };
 

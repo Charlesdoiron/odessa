@@ -1,37 +1,53 @@
-import { useForm } from "react-hook-form";
+// @ts-nocheck
+import { useForm, Controller } from "react-hook-form";
 
 import { Input } from "components/form/inputs/input";
 import { Textarea } from "components/form/inputs/textarea";
-import { StepStatus } from "./stepper";
 import API from "services/api";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-// interface FormValues {
-//   adress: string;
-//   startDate: string;
-//   availableSeat: string;
-//   availableVolume: string;
-//   needs: string;
-//   firstName: string;
-//   lastName: string;
-//   email: string;
-//   phone: string;
-// }
+import { InputLocation } from "../inputs/input-location";
+import { CollectType } from "typings";
+import { Dropdown } from "../inputs/dropdown";
 
 interface Props {
   onAbort: () => void;
-  setStep: (step: StepStatus) => void;
+  initialValues?: CollectType | null;
+  isEditing?: boolean;
 }
 
-export const CollectForm: React.FC<Props> = ({ onAbort, setStep }) => {
-  const [pickupGeometry] = useState(null);
+const formatInitialValues = (initialValues: CollectType) => {
+  if (!initialValues) return null;
+  const formatted = {};
+  for (const key of Object.keys(initialValues)) {
+    if (["departure"].includes(key)) {
+      // hack to react-hook-form, I didn't find a better way yet
+      formatted[key] = new Date(initialValues[key]).toISOString().slice(0, 16);
+    } else {
+      formatted[key] = initialValues[key];
+    }
+  }
+  return formatted;
+};
+export const CollectForm: React.FC<Props> = ({
+  onAbort,
+  initialValues,
+  isEditing,
+}) => {
   const navigate = useNavigate();
+
+  const [pickupGeometry, setPickupGeometry] = useState(
+    initialValues?.pickupGeometry
+  );
+  const [pickupName, setPickupName] = useState(initialValues?.pickupName);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+    control,
+  } = useForm({ defaultValues: formatInitialValues(initialValues) });
+
   const onSubmit = handleSubmit(async (form) => {
     const response = await API.post({
       path: "/collect",
@@ -53,27 +69,40 @@ export const CollectForm: React.FC<Props> = ({ onAbort, setStep }) => {
             </p>
             <form onSubmit={onSubmit}>
               <div className=" bg-white ">
-                <div className="grid grid-cols-6 gap-6 mb-5 ">
-                  <div className="col-span-6 sm:col-span-3">
+                <div className="w-full mb-5">
+                  <div className="col-span-12 sm:col-span-3">
                     <Input
                       type="text"
+                      id="title"
+                      label="Titre de ma collectee"
+                      placeholder="La collecte des Lilas (Pour retrouver / partager facilement la collecte)"
+                      register={register("title", { required: true })}
+                      error={errors.title}
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-6 gap-6 mb-5 ">
+                  <div className="col-span-6 sm:col-span-3">
+                    <InputLocation
                       id="pickupName"
-                      label="Adresse de la collecte"
-                      placeholder="Renseigner l'adresse de départ de la collecte"
-                      register={register("pickupName", { required: true })}
-                      error={errors.pickupName}
+                      label="Adresse de départ de la collecte"
+                      placeholder="Ex : 9 avenue de l'horloge, 35300 Rennes"
+                      name={pickupName}
+                      geometry={pickupGeometry}
+                      onChange={setPickupName}
+                      onChangeGeometry={setPickupGeometry}
                     />
                   </div>
 
                   <div className="col-span-6 sm:col-span-3">
                     <Input
-                      id="date"
+                      id="departure"
                       type="datetime-local"
                       autoComplete="off"
                       label="Date de la collecte"
                       placeholder="Renseigner l'heure de la collecte"
-                      register={register("date", { required: true })}
-                      error={errors.date}
+                      register={register("departure", { required: true })}
+                      error={errors.departure}
                     />
                   </div>
                 </div>
@@ -91,7 +120,30 @@ export const CollectForm: React.FC<Props> = ({ onAbort, setStep }) => {
                       error={errors.availableVolume}
                     />
                   </div>
+                  <div className="col-span-6 sm:col-span-3 ">
+                    <Controller
+                      name="status"
+                      control={control}
+                      defaultValue={{ label: "En cours", value: "accepted" }}
+                      render={({ field }) => (
+                        <Dropdown
+                          label="Status de la collecte"
+                          values={[
+                            { label: "En attente", value: "pending" },
+                            { label: "En cours", value: "accepted" },
+                            { label: "Chargée !", value: "completed" },
+                            { label: "Annulée", value: "canceled" },
+                          ]}
+                          register={register("status")}
+                          error={errors.status}
+                          id="status"
+                          field={field}
+                        />
+                      )}
+                    />
+                  </div>
                 </div>
+
                 {/* BESOIN */}
                 <div className="mb-5 pb-5 border-b border-dark">
                   <Textarea
@@ -146,6 +198,19 @@ export const CollectForm: React.FC<Props> = ({ onAbort, setStep }) => {
                         required: true,
                       })}
                       error={errors.phone}
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-6 gap-6 mb-5">
+                  <div className="col-span-6 sm:col-span-3">
+                    <Input
+                      type="text"
+                      id="whatsappLink"
+                      autoComplete="off"
+                      placeholder="Lien du groupe whatsapp"
+                      label="Lien du groupe whatsapp"
+                      register={register("whatsappLink")}
+                      error={errors.whatsappLink}
                     />
                   </div>
                 </div>

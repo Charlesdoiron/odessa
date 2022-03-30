@@ -55,7 +55,7 @@ export const Layout = ({ children }: Props) => {
                   >
                     🇺🇦
                   </div>
-                  <div className="w-full ml-10">
+                  <div className="w-3/6 ml-10 lg:visible invisible">
                     <div className="">
                       <label htmlFor="mobile-search" className="sr-only">
                         Rechercher par adresse / ville
@@ -84,21 +84,21 @@ export const Layout = ({ children }: Props) => {
                     >
                       Je crée un convoi
                     </Link>
-                    {/* <Link
+                    <Link
                       to="/collect-create"
                       type="button"
-                      className="flex-shrink-0 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5"
+                      className="flex-shrink-0 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5 py-5"
                     >
                       Je crée une collecte
                     </Link>
                     <Link
                       to="/driver-create"
                       type="button"
-                      className="flex-shrink-0 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5"
+                      className="flex-shrink-0 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5 py-5"
                     >
                       Je suis chauffeur
                     </Link>
-                    <Link
+                    {/* <Link
                       to="/hospitality-create"
                       type="button"
                       className="flex-shrink-0 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5"
@@ -146,12 +146,12 @@ export const Layout = ({ children }: Props) => {
                   </div>
 
                   {/* Search MOBILE */}
-                  <div className="flex-1 min-w-0 px-12 lg:hidden">
-                    <div className="max-w-xs w-full mx-auto">
+                  <div className="flex-1 min-w-full  lg:hidden mx-auto">
+                    <div className=" w-full ">
                       <label htmlFor="desktop-search" className="sr-only">
                         Rechercher par adresse / ville
                       </label>
-                      <div className="relative text-white focus-within:text-gray-600">
+                      <div className="relative text-white focus-within:text-gray-600 w-[80%]">
                         <div className="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
                           <SearchIcon className="h-5 w-5" aria-hidden="true" />
                         </div>

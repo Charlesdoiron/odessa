@@ -6,6 +6,8 @@ import { CustomMap } from "components/ mapGlsl";
 import { Header } from "./header";
 import { Body } from "./body";
 
+import { ArrowLeftIcon } from "@heroicons/react/solid";
+
 export const Convoy: React.FC = () => {
   const navigate = useNavigate();
   const [state, setState] = useState<ConvoyType | null>(null);
@@ -34,15 +36,25 @@ export const Convoy: React.FC = () => {
   return (
     <div className="grid grid-cols-1 gap-4 lg:col-span-2 ">
       <section aria-labelledby="section-1-title">
+        <div className=" text-dark md:text-white text-right text-[12px] md:-mt-6 mb-2 cursor-pointer flex justify-end">
+          <p>
+            <ArrowLeftIcon
+              className="mr-1.5 h-4 w-4 text-dark md:text-white mt-[0.5px]"
+              aria-hidden="true"
+            />
+          </p>
+
+          <p onClick={() => navigate("/")}>Revenir à l'accueil</p>
+        </div>
         <div className="rounded-lg bg-white overflow-hidden shadow">
-          <div className="rounded-lg bg-white overflow-hidden ">
+          <div className="rounded-lg bg-white  relative ">
             <div className="w-full h-[300px]">
               <CustomMap data={[state]} />
             </div>
           </div>
           <div className="p-6">
             <Header
-              title="Ma collecte de Rennes"
+              title={state.title}
               availableVolume={state.availableVolume}
               availableSeat={state.availableSeat}
               departure={state.departure}

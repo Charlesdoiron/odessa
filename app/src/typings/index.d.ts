@@ -1,17 +1,9 @@
 declare module "history";
 
-export type CollectType = {
-  availableSeat: number;
-  availableVolume: number;
-  createdAt: Date;
-  email: string;
-  name: string;
-  needs: string;
-  phone: string;
-  pickupGeometry: { type: string; coordinates: string[]; _id: string };
-  pickupName: string;
-  updatedAt: Date;
-};
+type PENDING = { label: "En attente"; value: "pending" };
+type ACCEPTED = { label: "En cours"; value: "accepted" };
+type CANCELED = { label: "Annulé"; value: "canceled" };
+type COMPLETED = { label: "Chargée !"; value: "completed" };
 
 export interface Geometry {
   type: string;
@@ -19,17 +11,27 @@ export interface Geometry {
   _id: string;
 }
 
-//  { label: "En attente", value: "pending" },
-//                             { label: "En cours", value: "accepted" },
-//                             { label: "Annulée", value: "declined" },
-//                             { label: "Sur la route", value: "delivering" },
-//                             { label: "Livrée !", value: "completed" },
-
-type PENDING = { label: "En attente"; value: "pending" };
-type ACCEPTED = { label: "En cours"; value: "accepted" };
+export type CollectType = {
+  _id: string;
+  title: string;
+  pickupName: string;
+  pickupGeometry: Geometry;
+  departure: Date;
+  availableVolume: number;
+  status: PENDING | ACCEPTED | CANCELED | COMPLETED;
+  needs: string;
+  name: string;
+  email: string;
+  phone: string;
+  createdAt: Date;
+  updatedAt: Date;
+  whatsappLink: string;
+  __v: number;
+};
 
 export interface ConvoyType {
   _id: string;
+  title: string;
   pickupName: string;
   pickupGeometry: Geometry;
   dropOffName: string;

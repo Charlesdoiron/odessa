@@ -26,7 +26,9 @@ export const Filters: React.FC = () => {
   const [selected, setSelected] = useState(data[0].value);
 
   const handleSelect = (value: string) => {
-    setSelected(value);
+    if (value === "housing") {
+      window.open("https://hu.eu4ua.org/", "_blank");
+    } else setSelected(value);
   };
 
   return (
