@@ -1,0 +1,11 @@
+{
+    "translation": {
+        "cards": {
+        "convoy": "Convoi",
+        "full": "plein"
+        },
+        "app": {
+        "loading": "Chargement ..."
+        }
+    }
+}
