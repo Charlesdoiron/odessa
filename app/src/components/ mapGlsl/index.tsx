@@ -32,16 +32,21 @@ type PopupInfo = {
 interface Props {
   data: ConvoyType[];
   zoom?: number;
+  noSearchOnDrag?: boolean;
 }
 
-export const CustomMap: React.FC<Props> = ({ data, zoom }) => {
+export const CustomMap: React.FC<Props> = ({ data, zoom, noSearchOnDrag }) => {
   const { id } = useParams<{ id: string }>();
   const [, setSearchParams] = useSearchParams();
 
   const [popupInfo, setPopupInfo] = useState<PopupInfo | null>(null);
   const mapRef = React.useRef<any>();
 
-  const handleDrag = (e: any) => {
+  const handleDrag = (e: {
+    viewState: { longitude: number; latitude: number };
+  }) => {
+    if (!e) return;
+    if (noSearchOnDrag) return;
     const { longitude, latitude } = e.viewState;
     setTimeout(() => {
       setSearchParams({ location: `${longitude}%${latitude}` });
@@ -117,7 +122,7 @@ export const CustomMap: React.FC<Props> = ({ data, zoom }) => {
         }}
         mapStyle="mapbox://styles/mapbox/dark-v9"
         mapboxAccessToken={TOKEN}
-        onDrag={(r) => handleDrag(r)}
+        onDrag={(e) => handleDrag(e)}
       >
         <GeolocateControl position="top-left" />
         <FullscreenControl position="top-left" />
