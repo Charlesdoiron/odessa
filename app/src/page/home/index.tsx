@@ -63,7 +63,7 @@ export const Home = () => {
               </h2>
               <div className="rounded-lg bg-white overflow-hidden shadow">
                 <div className="p-6  h-[70vh] w-full">
-                  {state && <CustomMap data={state} zoom={5} />}
+                  {state && <CustomMap data={state} zoom={5} searchOnDrag />}
                 </div>
               </div>
             </section>
