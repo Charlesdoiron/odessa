@@ -29,10 +29,16 @@ const formatInitialValues = (initialValues: CollectType) => {
   }
   return formatted;
 };
-export const CollectForm: React.FC<Props> = ({ onAbort, initialValues, isEditing }) => {
+export const CollectForm: React.FC<Props> = ({
+  onAbort,
+  initialValues,
+  isEditing,
+}) => {
   const navigate = useNavigate();
 
-  const [pickupGeometry, setPickupGeometry] = useState(initialValues?.pickupGeometry);
+  const [pickupGeometry, setPickupGeometry] = useState(
+    initialValues?.pickupGeometry
+  );
   const [pickupName, setPickupName] = useState(initialValues?.pickupName);
 
   const {
@@ -208,12 +214,17 @@ export const CollectForm: React.FC<Props> = ({ onAbort, initialValues, isEditing
                 </div>
               </div>
               <div className="flex justify-between">
-                <button onClick={onAbort} type="submit" className="text-dark underline">
+                <button
+                  onClick={onAbort}
+                  type="submit"
+                  className="text-dark underline"
+                >
                   Annuler
                 </button>
                 <button
                   type="submit"
-                  className="inline-flex justify-center py-4 px-20 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                  className="inline-flex justify-center py-4 px-20 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
                   Créer la collecte
                 </button>
               </div>

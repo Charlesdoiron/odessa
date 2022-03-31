@@ -38,8 +38,8 @@ export const ConvoyCreate = () => {
         <h2 className="sr-only" id="section-1-title">
           Création d'un convoi
         </h2>
-        <div className="rounded-lg bg-white overflow-hidden shadow">
-          <div className="p-6">
+        <div className="rounded-lg bg-white  shadow lg:mx-auto rounded-lg bg-white shadow -mt-[80px] mb-10 max-w-5xl mx-5  ">
+          <div className="p-6 w-full  ">
             <ConvoyForm
               onAbort={() => navigate("/")}
               initialValues={state}
