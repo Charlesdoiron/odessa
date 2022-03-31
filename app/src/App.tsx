@@ -39,10 +39,13 @@ const App: React.FC = () => {
 
               {/* <Route path="/collect" element={<Home />}></Route> */}
               <Route path="/collect-create" element={<CollectCreate />}></Route>
-              <Route path="/collect-create" element={<CollectCreate />}></Route>
+
               <Route path="/hospitality/:id" element={<Collect />}></Route>
               {/* <Route path="/hospitality" element={<Home />}></Route> */}
-              <Route path="/hospitality-create" element={<HospitalityCreate />}></Route>
+              <Route
+                path="/hospitality-create"
+                element={<HospitalityCreate />}
+              ></Route>
               <Route path="/hospitality/:id" element={<Hospitality />}></Route>
               <Route path="/driver-create" element={<DriverCreate />}></Route>
               {/* <Route path="/map" element={<Home />}></Route> */}

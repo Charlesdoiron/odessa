@@ -13,11 +13,15 @@ export const Layout = ({ children }: Props) => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [pathname]);
 
+  console.log(pathname);
+
   if (pathname.includes("/connexion") || pathname.includes("/inscription")) {
     return <AuthLayout>{children}</AuthLayout>;
   } else if (
     pathname.includes("/convoy") ||
     pathname.includes("/collect") ||
+    pathname.includes("/collect-create") ||
+    pathname.includes("/convoy-create") ||
     pathname.includes("/mentions-legales") ||
     pathname.includes("/a-propos")
   ) {
