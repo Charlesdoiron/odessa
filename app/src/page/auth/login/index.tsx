@@ -3,11 +3,14 @@ import { useForm } from "react-hook-form";
 
 import { Input } from "components/form/inputs/input";
 import API from "services/api";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useCount } from "context/user-context";
+import { useAuth } from "hooks/auth";
 
 export const Login: React.FC = () => {
   const navigate = useNavigate();
+  let location = useLocation();
+  let auth = useAuth();
   const { dispatch } = useCount();
 
   const {
@@ -16,17 +19,12 @@ export const Login: React.FC = () => {
     formState: { errors },
   } = useForm();
 
+  // @ts-ignore: React router typescript error / need to find solution
+  let from = location.state?.from?.pathname || "/";
   const onSubmit = handleSubmit(async (form) => {
-    const response = await API.post({
-      path: "/user/login",
-      body: { ...form },
+    auth.login({ ...form }, () => {
+      navigate(from, { replace: true });
     });
-
-    if (!response.ok) return alert(response.error);
-    else {
-      dispatch({ type: "logged", payload: response });
-      navigate("/");
-    }
   });
   return (
     <>

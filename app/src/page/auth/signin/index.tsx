@@ -2,11 +2,16 @@ import { LockClosedIcon } from "@heroicons/react/solid";
 import { useForm } from "react-hook-form";
 
 import { Input } from "components/form/inputs/input";
-import API from "services/api";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "hooks/auth";
 
 export const Signin: React.FC = () => {
   const navigate = useNavigate();
+  let location = useLocation();
+
+  let auth = useAuth();
+  // @ts-ignore: React router typescript error / need to find solution
+  let from = location.state?.from?.pathname || "/";
 
   const {
     register,
@@ -15,12 +20,9 @@ export const Signin: React.FC = () => {
   } = useForm();
 
   const onSubmit = handleSubmit(async (form) => {
-    const response = await API.post({
-      path: "/user/signin",
-      body: { ...form },
+    auth.signin({ ...form }, () => {
+      navigate(from, { replace: true });
     });
-    if (!response.ok) return alert(response.error);
-    else navigate("/");
   });
   return (
     <>
