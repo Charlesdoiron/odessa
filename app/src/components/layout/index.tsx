@@ -44,7 +44,7 @@ export const PrimaryLayout: React.FC<Props> = ({ children }) => {
               A propos
             </Link>
             <div className="mt-2">
-              <span className="block sm:inline">&copy; 2021 Odessa.</span>{" "}
+              <span className="block sm:inline">&copy; 2021 Caravane.</span>{" "}
               <span className="block sm:inline">Tous droits réservés.</span>
             </div>
           </div>
