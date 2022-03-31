@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from "react";
 import { Menu, Popover, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
-import { SearchIcon } from "@heroicons/react/solid";
+import { SearchIcon, ArrowDownIcon } from "@heroicons/react/solid";
 import { Cards } from "components/cards";
 import classNames from "services/classNames";
 import { Link, useNavigate, useLocation } from "react-router-dom";
@@ -51,10 +51,12 @@ export const Layout = ({ children }: Props) => {
   }, [pathname]);
 
   if (pathname === "/connexion") {
-    return <div className="h-[100vh] flex items-center justify-center">{children}</div>;
+    return (
+      <div className="h-[100vh] flex items-center justify-center">
+        {children}
+      </div>
+    );
   }
-
-  console.log(auth);
 
   return (
     <>
@@ -67,22 +69,11 @@ export const Layout = ({ children }: Props) => {
                   {/* Logo */}
                   <div
                     className="absolute left-0 flex-shrink-0 lg:static hover:cursor-pointer"
-                    onClick={() => navigate("/")}>
+                    onClick={() => navigate("/")}
+                  >
                     🇺🇦
                   </div>
-                  <div className="ml-5 flex flex-col">
-                    {Object.keys(lngs).map((lng) => (
-                      <button
-                        key={lng}
-                        style={{
-                          fontWeight: i18n.resolvedLanguage === lng ? "bold" : "normal",
-                        }}
-                        type="submit"
-                        onClick={() => i18n.changeLanguage(lng)}>
-                        {lngs[lng].nativeName}
-                      </button>
-                    ))}
-                  </div>
+
                   <div className="w-3/6 ml-10 lg:visible invisible">
                     <div className="">
                       <label htmlFor="mobile-search" className="sr-only">
@@ -108,42 +99,42 @@ export const Layout = ({ children }: Props) => {
                     <Link
                       to="/convoy-create"
                       type="button"
-                      className="flex-shrink-0 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5 py-5">
+                      className="flex-shrink-0 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5 py-5"
+                    >
                       {t("layout.createConvoy")}
                     </Link>
                     <Link
                       to="/collect-create"
                       type="button"
-                      className="flex-shrink-0 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5 py-5">
+                      className="flex-shrink-0 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5 py-5"
+                    >
                       {t("layout.createCollect")}
                     </Link>
                     <Link
                       to="/driver-create"
                       type="button"
-                      className="flex-shrink-0 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5 py-5">
+                      className="flex-shrink-0 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5 py-5"
+                    >
                       {t("layout.driver")}
                     </Link>
-                    {/* <Link
-                      to="/hospitality-create"
-                      type="button"
-                      className="flex-shrink-0 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5"
-                    >
-                      Je propose un logement
-                    </Link> */}
 
-                    {/* Profile dropdown */}
                     <Menu as="div" className="ml-4 relative flex-shrink-0">
                       <div>
                         <Menu.Button className="bg-white rounded-full flex text-sm ring-2 ring-white ring-opacity-20 focus:outline-none focus:ring-opacity-100">
                           <span className="sr-only">Open user menu</span>
-                          <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" />
+                          <img
+                            className="h-8 w-8 rounded-full"
+                            src={user.imageUrl}
+                            alt=""
+                          />
                         </Menu.Button>
                       </div>
                       <Transition
                         as={Fragment}
                         leave="transition ease-in duration-75"
                         leaveFrom="transform opacity-100 scale-100"
-                        leaveTo="transform opacity-0 scale-95">
+                        leaveTo="transform opacity-0 scale-95"
+                      >
                         <Menu.Items className="origin-top-right z-40 absolute -right-2 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                           {userNavigation.map((item) => (
                             <Menu.Item key={item.name}>
@@ -153,7 +144,8 @@ export const Layout = ({ children }: Props) => {
                                   className={classNames(
                                     active ? "bg-gray-100" : "",
                                     "block px-4 py-2 w-full text-sm text-gray-700 text-left"
-                                  )}>
+                                  )}
+                                >
                                   {item.name}
                                 </button>
                               )}
@@ -162,6 +154,43 @@ export const Layout = ({ children }: Props) => {
                         </Menu.Items>
                       </Transition>
                     </Menu>
+                    <div className="ml-5 flex flex-col">
+                      <Menu as="div" className="ml-4 relative flex-shrink-0">
+                        <div>
+                          <Menu.Button className="bg-white rounded-full flex text-sm  ring-opacity-20 focus:outline-none focus:ring-opacity-100 px-3 py-2 flex text-indigo-500">
+                            {t("settings.traduction")}
+                            <ArrowDownIcon
+                              className="h-3 w-3 mt-1 ml-2"
+                              aria-hidden="true"
+                            />
+                          </Menu.Button>
+                        </div>
+                        <Transition
+                          as={Fragment}
+                          leave="transition ease-in duration-75"
+                          leaveFrom="transform opacity-100 scale-100"
+                          leaveTo="transform opacity-0 scale-95"
+                        >
+                          <Menu.Items className="origin-top-right w-full z-40 absolute -right-0 mt-2  rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            {Object.keys(lngs).map((lng) => (
+                              <Menu.Item key={lng}>
+                                {({ active }) => (
+                                  <button
+                                    onClick={() => i18n.changeLanguage(lng)}
+                                    className={classNames(
+                                      active ? "bg-gray-100" : "",
+                                      "block px-4 py-2 w-full text-sm text-gray-700 text-left"
+                                    )}
+                                  >
+                                    {lngs[lng].nativeName}
+                                  </button>
+                                )}
+                              </Menu.Item>
+                            ))}
+                          </Menu.Items>
+                        </Transition>
+                      </Menu>
+                    </div>
                   </div>
 
                   {/* Search MOBILE */}
@@ -193,7 +222,10 @@ export const Layout = ({ children }: Props) => {
                       {open ? (
                         <XIcon className="block h-6 w-6" aria-hidden="true" />
                       ) : (
-                        <MenuIcon className="block h-6 w-6" aria-hidden="true" />
+                        <MenuIcon
+                          className="block h-6 w-6"
+                          aria-hidden="true"
+                        />
                       )}
                     </Popover.Button>
                   </div>
@@ -212,7 +244,8 @@ export const Layout = ({ children }: Props) => {
                     enterTo="opacity-100"
                     leave="duration-150 ease-in"
                     leaveFrom="opacity-100"
-                    leaveTo="opacity-0">
+                    leaveTo="opacity-0"
+                  >
                     <Popover.Overlay className="z-20 fixed inset-0 bg-black bg-opacity-25" />
                   </Transition.Child>
 
@@ -223,10 +256,12 @@ export const Layout = ({ children }: Props) => {
                     enterTo="opacity-100 scale-100"
                     leave="duration-150 ease-in"
                     leaveFrom="opacity-100 scale-100"
-                    leaveTo="opacity-0 scale-95">
+                    leaveTo="opacity-0 scale-95"
+                  >
                     <Popover.Panel
                       focus
-                      className="z-30 absolute top-0 inset-x-0 max-w-3xl mx-auto w-full p-2 transition transform origin-top">
+                      className="z-30 absolute top-0 inset-x-0 max-w-3xl mx-auto w-full p-2 transition transform origin-top"
+                    >
                       <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y divide-gray-200">
                         <div className="pt-3 pb-2">
                           <div className="flex items-center justify-between px-4">
@@ -247,7 +282,8 @@ export const Layout = ({ children }: Props) => {
                           <div className="mt-3 px-2 space-y-1">
                             <a
                               href="/convoy-create"
-                              className="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800">
+                              className="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800"
+                            >
                               Je crée un convoi
                             </a>
                             {/* <a
@@ -273,7 +309,11 @@ export const Layout = ({ children }: Props) => {
                         <div className="pt-4 pb-2">
                           <div className="flex items-center px-5">
                             <div className="flex-shrink-0">
-                              <img className="h-10 w-10 rounded-full" src={user.imageUrl} alt="" />
+                              <img
+                                className="h-10 w-10 rounded-full"
+                                src={user.imageUrl}
+                                alt=""
+                              />
                             </div>
                             <div className="ml-3 min-w-0 flex-1">
                               <div className="text-base font-medium text-gray-800 truncate">
@@ -285,9 +325,15 @@ export const Layout = ({ children }: Props) => {
                             </div>
                             <button
                               type="button"
-                              className="ml-auto flex-shrink-0 bg-white p-1 text-gray-400 rounded-full hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                              <span className="sr-only">View notifications</span>
-                              <BellIcon className="h-6 w-6" aria-hidden="true" />
+                              className="ml-auto flex-shrink-0 bg-white p-1 text-gray-400 rounded-full hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            >
+                              <span className="sr-only">
+                                View notifications
+                              </span>
+                              <BellIcon
+                                className="h-6 w-6"
+                                aria-hidden="true"
+                              />
                             </button>
                           </div>
                           <div className="mt-3 px-2 space-y-1">
@@ -295,7 +341,8 @@ export const Layout = ({ children }: Props) => {
                               <button
                                 key={item.name}
                                 onClick={() => item.onClick()}
-                                className="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800">
+                                className="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800"
+                              >
                                 {item.name}
                               </button>
                             ))}
@@ -327,7 +374,9 @@ export const Layout = ({ children }: Props) => {
                   </div>
                 </section>
               </div>
-              <div className="grid grid-cols-1 gap-4 lg:col-span-2 ">{children}</div>
+              <div className="grid grid-cols-1 gap-4 lg:col-span-2 ">
+                {children}
+              </div>
             </div>
           </div>
         </main>
