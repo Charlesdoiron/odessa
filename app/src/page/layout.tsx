@@ -6,6 +6,7 @@ import { Cards } from "components/cards";
 import classNames from "services/classNames";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Filters } from "components/filters";
+import API from "services/api";
 
 const user = {
   name: "Charles d'Oiron",
@@ -14,12 +15,6 @@ const user = {
     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 };
 
-const userNavigation = [
-  { name: "Votre profil", href: "/" },
-  { name: "Se connecter", href: "/connexion" },
-  { name: "Se déconnecter", href: "/connexion" },
-];
-
 type Props = {
   children: JSX.Element;
 };
@@ -27,6 +22,18 @@ export const Layout = ({ children }: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { pathname } = location;
+
+  const logout = async () => {
+    await API.post({
+      path: "/user/logout",
+    }).then(() => navigate("/connexion"));
+  };
+
+  const userNavigation = [
+    { name: "Votre profil", onClick: () => navigate("/") },
+    { name: "Se connecter", onClick: () => navigate("/connexion") },
+    { name: "Se déconnecter", onClick: () => logout() },
+  ];
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -128,15 +135,15 @@ export const Layout = ({ children }: Props) => {
                           {userNavigation.map((item) => (
                             <Menu.Item key={item.name}>
                               {({ active }) => (
-                                <a
-                                  href={item.href}
+                                <button
+                                  onClick={() => item.onClick()}
                                   className={classNames(
                                     active ? "bg-gray-100" : "",
-                                    "block px-4 py-2 text-sm text-gray-700"
+                                    "block px-4 py-2 w-full text-sm text-gray-700 text-left"
                                   )}
                                 >
                                   {item.name}
-                                </a>
+                                </button>
                               )}
                             </Menu.Item>
                           ))}
@@ -290,13 +297,13 @@ export const Layout = ({ children }: Props) => {
                           </div>
                           <div className="mt-3 px-2 space-y-1">
                             {userNavigation.map((item) => (
-                              <a
+                              <button
                                 key={item.name}
-                                href={item.href}
+                                onClick={() => item.onClick()}
                                 className="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800"
                               >
                                 {item.name}
-                              </a>
+                              </button>
                             ))}
                           </div>
                         </div>
