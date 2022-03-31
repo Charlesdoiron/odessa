@@ -1,51 +1,21 @@
 import { LocationMarkerIcon, UsersIcon, BriefcaseIcon } from "@heroicons/react/solid";
-import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import useWindowFocus from "use-window-focus";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 // Mocks
-import { useEffect, useState } from "react";
 import { ConvoyType } from "typings";
-import API from "services/api";
 
-export const Cards = () => {
+type Props = {
+  data: ConvoyType[] | null;
+};
+
+export const Cards = ({ data }: Props) => {
   const { t } = useTranslation();
-
-  const [state, setState] = useState<ConvoyType[] | null>(null);
-  const [error, setError] = useState<string | undefined>(undefined);
-  const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
-  const windowFocused = useWindowFocus();
-  const location = useLocation();
-
-  const refresh = async () => {
-    const response = await API.get({ path: "/event" }); // searchParams are automatically added
-    if (response.ok) {
-      setState(response.data);
-    } else {
-      setError(response.error);
-    }
-  };
-
-  useEffect(() => {
-    if (windowFocused) {
-      refresh();
-    }
-  }, [windowFocused, location.pathname, searchParams]);
-
-  useEffect(() => {
-    if (!state) {
-      refresh();
-    }
-  }, [state]);
-
-  if (!state) return <>{t("app.loading")}</>;
-  if (error) return <p>{error}</p>;
 
   return (
     <div className="bg-white shadow overflow-hidden sm:rounded-md">
       <ul className="divide-y divide-gray-200">
-        {state.map(
+        {data?.map(
           ({ _id, type, availableSeat, phone, pickupName, availableVolume, status, title }) => {
             return (
               <li key={_id} className="block hover:bg-gray-50 hover:cursor-pointer">
@@ -60,7 +30,7 @@ export const Cards = () => {
                               ? "bg-green-100 text-green-800"
                               : "bg-yellow-100 text-yellow-800"
                           }`}>
-                          {t("cards.convoy")} - {status?.label.toLowerCase()}
+                          {t(`cards.${type}`)} - {status?.label.toLowerCase()}
                         </p>
                       </div>
                     </div>

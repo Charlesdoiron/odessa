@@ -55,9 +55,9 @@ export const CollectForm: React.FC<Props> = ({ onAbort, initialValues, isEditing
       <div>
         <div className=" w-full">
           <div className="bg-white space-y-6 sm:p-6 w-full">
-            <p className="text-[30px] font-bold text-dark inline-block">Je Créer une</p>
-            <p className="text-[30px] font-bold text-indigo-600 inline-block ml-2 underline">
-              collecte
+            <p className="text-[30px] font-bold text-dark inline-block">
+              Je crée une&nbsp;
+              <u className="text-indigo-600 underline">collecte</u>
             </p>
             <form onSubmit={onSubmit}>
               <div className=" bg-white ">
