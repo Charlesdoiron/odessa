@@ -115,21 +115,21 @@ export const Header: React.FC<Props> = ({
                     <Link
                       to="/convoy-create"
                       type="button"
-                      className="flex-shrink-0 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5 py-5"
+                      className="flex-shrink-0 rounded-md hover:text-white bg-indigo-800 hover:bg-opacity-80 focus:outline-none focus:ring-2 focus:ring-white p-2 text-white mr-5 px-5"
                     >
                       {t("layout.createConvoy")}
                     </Link>
                     <Link
                       to="/collect-create"
                       type="button"
-                      className="flex-shrink-0 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5 py-5"
+                      className="flex-shrink-0 rounded-md hover:text-white bg-indigo-800 hover:bg-opacity-80 focus:outline-none focus:ring-2 focus:ring-white p-2 text-white mr-5 px-5"
                     >
                       {t("layout.createCollect")}
                     </Link>
                     {/* <Link
                       to="/driver-create"
                       type="button"
-                      className="flex-shrink-0 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5 py-5"
+                      className="flex-shrink-0 rounded-md hover:text-white bg-indigo-800 hover:bg-opacity-80 focus:outline-none focus:ring-2 focus:ring-white p-2 text-white mr-5 px-5"
                     >
                       {t("layout.driver")}
                     </Link> */}
@@ -140,7 +140,9 @@ export const Header: React.FC<Props> = ({
                   <Menu as="div" className="ml-4 relative flex-shrink-0">
                     <div>
                       <Menu.Button className="bg-white rounded-full flex text-sm  ring-opacity-20 focus:outline-none focus:ring-opacity-100 px-3 py-2 flex text-indigo-500">
-                        {t("settings.traduction")}
+                        <p className="mt-[1px]">
+                          {i18n.language === "fr" ? "🇫🇷" : "🇪🇺"}
+                        </p>
                         <ArrowDownIcon
                           className="h-3 w-3 mt-1 ml-2"
                           aria-hidden="true"
@@ -153,7 +155,7 @@ export const Header: React.FC<Props> = ({
                       leaveFrom="transform opacity-100 scale-100"
                       leaveTo="transform opacity-0 scale-95"
                     >
-                      <Menu.Items className="origin-top-right w-full z-40 absolute -right-0 mt-2  rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      <Menu.Items className="origin-top-right w-full z-40 absolute -right-0 mt-2  rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none w-[100px]">
                         {Object.keys(lngs).map((lng) => (
                           <Menu.Item key={lng}>
                             {({ active }) => (
