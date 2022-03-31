@@ -3,6 +3,7 @@ import dayjs from "dayjs";
 import "dayjs/locale/fr";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { ConvoyType } from "typings";
+import { Share } from "components/share";
 
 dayjs.extend(relativeTime);
 dayjs.locale("fr");
@@ -37,8 +38,12 @@ export const Header: React.FC<Props> = ({
   return (
     <div>
       <div className="flex justify-between items-center">
-        <h3 className="text-lg leading-6 font-medium text-gray-900">{title}</h3>
-
+        <div className="flex align-center py-5 ">
+          <h3 className="text-[40px] leading-6 font-bold text-gray-900 mr-10">
+            {title}
+          </h3>
+          <Share />
+        </div>
         <div className="ml-2 flex-shrink-0 flex">
           <p
             className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full  ${"bg-green-100 text-green-800"}`}
