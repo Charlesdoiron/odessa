@@ -52,24 +52,24 @@ export const Header: React.FC<Props> = ({
     <Popover as="header" className="pb-24 bg-indigo-600">
       {({ open }) => (
         <>
-          <div className="md:max-w-screen-3xl max-w-screen-4xl mx-auto lg:px-10 lg:py-0  px-5  py-5 ">
-            <div className="relative py-5 flex items-center justify-center lg:justify-between">
+          <div className="md:max-w-screen-3xl max-w-screen-4xl mx-auto lg:px-10 lg:py-0  px-5  md:py-5 ">
+            <div className="relative md:py-5 flex items-center justify-center lg:justify-between">
               {/* Logo */}
               <div
-                className="absolute left-0 flex-shrink-0 lg:static hover:cursor-pointer text-white font-bold"
+                className="absolute left-0 flex-shrink-0 lg:static hover:cursor-pointer text-white font-bold top-2 "
                 onClick={() => navigate("/")}
               >
-                <p className="text-[30px]">Caravane</p>
+                <p className="text-[30px]">Caravan</p>
               </div>
 
               {!isSimple && (
-                <div className="w-3/6 ml-10 lg:visible invisible">
+                <div className="w-3/6 ml-10  md:block  hidden">
                   <div className="">
                     <label htmlFor="mobile-search" className="sr-only">
                       {t("layout.inputSearch")}
                     </label>
                     <div className="relative text-white focus-within:text-gray-600">
-                      <div className="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
+                      <div className="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center ">
                         <SearchIcon className="h-5 w-5" aria-hidden="true" />
                       </div>
                       <input
@@ -189,18 +189,18 @@ export const Header: React.FC<Props> = ({
 
               {/* Search MOBILE */}
               {!isSimple && (
-                <div className="flex-1 min-w-full  lg:hidden mx-auto">
+                <div className=" min-w-full   lg:hidden mx-auto mt-20">
                   <div className=" w-full ">
                     <label htmlFor="desktop-search" className="sr-only">
                       {t("layout.inputSearch")}
                     </label>
-                    <div className="relative text-white focus-within:text-gray-600 w-[80%]">
+                    <div className="relative text-white focus-within:text-gray-600 w-full mb-5">
                       <div className="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
                         <SearchIcon className="h-5 w-5" aria-hidden="true" />
                       </div>
                       <input
                         id="desktop-search"
-                        className="block w-full bg-white bg-opacity-20 py-2 pl-10 pr-3 border border-transparent rounded-md leading-5 text-gray-900 placeholder-white focus:outline-none focus:bg-opacity-100 focus:border-transparent focus:placeholder-gray-500 focus:ring-0 sm:text-sm"
+                        className="block w-full bg-white bg-opacity-20 py-5 pl-10 pr-3 border border-transparent rounded-md leading-5 text-gray-900 placeholder-white focus:outline-none focus:bg-opacity-100 focus:border-transparent focus:placeholder-gray-500 focus:ring-0 sm:text-sm"
                         placeholder={t("layout.inputSearch")}
                         type="search"
                         name="search"
@@ -211,7 +211,7 @@ export const Header: React.FC<Props> = ({
               )}
 
               {/* Menu button */}
-              <div className="absolute right-0 flex-shrink-0 lg:hidden">
+              <div className="absolute right-0 flex-shrink-0 lg:hidden top-2">
                 {/* Mobile menu button */}
                 <Popover.Button className="bg-transparent p-2 rounded-md inline-flex items-center justify-center text-indigo-200 hover:text-white hover:bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white">
                   <span className="sr-only">Open main menu</span>

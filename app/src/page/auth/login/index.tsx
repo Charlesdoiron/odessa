@@ -1,17 +1,14 @@
 import { LockClosedIcon } from "@heroicons/react/solid";
-import { SubmitHandler, useForm } from "react-hook-form";
 
 import { Input } from "components/form/inputs/input";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useCount } from "context/user-context";
 import { useAuth } from "hooks/auth";
-import { LoginType } from "context/auth-context";
+import { useForm } from "react-hook-form";
 
 export const Login: React.FC = () => {
   const navigate = useNavigate();
   let location = useLocation();
   let auth = useAuth();
-  const { dispatch } = useCount();
 
   const {
     register,
