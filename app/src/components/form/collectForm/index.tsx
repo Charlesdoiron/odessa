@@ -29,16 +29,10 @@ const formatInitialValues = (initialValues: CollectType) => {
   }
   return formatted;
 };
-export const CollectForm: React.FC<Props> = ({
-  onAbort,
-  initialValues,
-  isEditing,
-}) => {
+export const CollectForm: React.FC<Props> = ({ onAbort, initialValues, isEditing }) => {
   const navigate = useNavigate();
 
-  const [pickupGeometry, setPickupGeometry] = useState(
-    initialValues?.pickupGeometry
-  );
+  const [pickupGeometry, setPickupGeometry] = useState(initialValues?.pickupGeometry);
   const [pickupName, setPickupName] = useState(initialValues?.pickupName);
 
   const {
@@ -50,8 +44,8 @@ export const CollectForm: React.FC<Props> = ({
 
   const onSubmit = handleSubmit(async (form) => {
     const response = await API.post({
-      path: "/collect",
-      body: { ...form, pickupGeometry },
+      path: "/event",
+      body: { ...form, type: "collect", pickupGeometry, pickupName },
     });
     if (!response.ok) return alert(response.error);
     navigate("/");
@@ -61,9 +55,7 @@ export const CollectForm: React.FC<Props> = ({
       <div>
         <div className=" w-full">
           <div className="bg-white space-y-6 sm:p-6 w-full">
-            <p className="text-[30px] font-bold text-dark inline-block">
-              Je Créer une
-            </p>
+            <p className="text-[30px] font-bold text-dark inline-block">Je Créer une</p>
             <p className="text-[30px] font-bold text-indigo-600 inline-block ml-2 underline">
               collecte
             </p>
@@ -216,17 +208,12 @@ export const CollectForm: React.FC<Props> = ({
                 </div>
               </div>
               <div className="flex justify-between">
-                <button
-                  onClick={onAbort}
-                  type="submit"
-                  className="text-dark underline"
-                >
+                <button onClick={onAbort} type="submit" className="text-dark underline">
                   Annuler
                 </button>
                 <button
                   type="submit"
-                  className="inline-flex justify-center py-4 px-20 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
+                  className="inline-flex justify-center py-4 px-20 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                   Créer la collecte
                 </button>
               </div>

@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
 const dbConnection = require("../mongo");
-const MODELNAME = "Collect";
+const MODELNAME = "event";
 
 const PENDING = { label: "En attente", value: "pending" };
 const ACCEPTED = { label: "En cours", value: "accepted" };
 const CANCELED = { label: "Annulé", value: "canceled" };
-const COMPLETED = { label: "Chargée !", value: "completed" };
+const DELIVERING = { label: "Sur la route", value: "delivering" };
+const COMPLETED = { label: "Livrée !", value: "completed" };
 
 const locationSchema = new mongoose.Schema({
   type: {
@@ -22,15 +23,16 @@ const locationSchema = new mongoose.Schema({
 
 const Schema = new mongoose.Schema(
   {
+    type: {
+      type: String,
+      enum: ["convoy", "collect"],
+    },
     title: String,
-    date: Date,
     pickupName: String,
     pickupGeometry: {
       type: locationSchema,
       index: "2dsphere",
     },
-    loadingVolume: String,
-    convoy: { type: mongoose.Types.ObjectId, ref: "convoy" },
     // either a register user...
     user: { type: mongoose.Types.ObjectId, ref: "user" },
     // ...or not
@@ -48,9 +50,28 @@ const Schema = new mongoose.Schema(
     name: { type: String },
     whatsappLink: String,
     status: { type: Object, enum: [PENDING, ACCEPTED, CANCELED, COMPLETED] },
+    /* ONLY CONVOY */
+    departure: Date,
+    dropOffName: String,
+    dropOffGeometry: {
+      type: locationSchema,
+      index: "2dsphere",
+    },
+    availableSeat: Number,
+    availableVolume: Number,
+    needs: String,
+    needDrivers: Boolean,
+    needCollects: Boolean,
+    // either a register user...
+    driver: { type: mongoose.Types.ObjectId, ref: "user" },
+    // ...or not
+    /* ONLY COLLECT */
+    date: Date,
+    loadingVolume: String,
+    convoy: { type: mongoose.Types.ObjectId, ref: "event" },
   },
   { timestamps: true }
 );
 
-const ConvoiModel = dbConnection.models[MODELNAME] || dbConnection.model(MODELNAME, Schema);
-module.exports = ConvoiModel;
+const EventModel = dbConnection.models[MODELNAME] || dbConnection.model(MODELNAME, Schema);
+module.exports = EventModel;

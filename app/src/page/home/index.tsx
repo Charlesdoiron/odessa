@@ -22,9 +22,7 @@ export const Home = () => {
         Création d'un convoi
       </h2>
       <div className="rounded-lg bg-white overflow-hidden shadow">
-        <div className="p-6  h-[70vh] w-full">
-          {state && <CustomMap data={state} zoom={5} />}
-        </div>
+        <div className="p-6  h-[70vh] w-full">{state && <CustomMap data={state} zoom={5} />}</div>
       </div>
     </section>
   );

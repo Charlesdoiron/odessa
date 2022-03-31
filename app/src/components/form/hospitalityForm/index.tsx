@@ -36,8 +36,8 @@ export const HospitalityForm: React.FC<Props> = ({ onAbort }) => {
   } = useForm();
   const onSubmit = handleSubmit(async (form) => {
     const response = await API.post({
-      path: "/convoy",
-      body: { ...form, pickupName, pickupGeometry },
+      path: "/event",
+      body: { ...form, type: "convoy", pickupName, pickupGeometry },
     });
     if (!response.ok) return alert(response.error);
     navigate("/");
@@ -48,9 +48,7 @@ export const HospitalityForm: React.FC<Props> = ({ onAbort }) => {
       <div>
         <div className=" w-full">
           <div className="bg-white space-y-6 sm:p-6 w-full">
-            <p className="text-[30px] font-bold text-dark inline-block">
-              Je propose un
-            </p>
+            <p className="text-[30px] font-bold text-dark inline-block">Je propose un</p>
             <p className="text-[30px] font-bold text-indigo-600 inline-block ml-2 underline">
               logement
             </p>
@@ -111,9 +109,7 @@ export const HospitalityForm: React.FC<Props> = ({ onAbort }) => {
                   />
                 </div>
                 <div className="mb-5">
-                  <label className="block text-sm font-medium text-gray-700">
-                    Photos
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700">Photos</label>
                   <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                     <div className="space-y-1 text-center">
                       <svg
@@ -121,8 +117,7 @@ export const HospitalityForm: React.FC<Props> = ({ onAbort }) => {
                         stroke="currentColor"
                         fill="none"
                         viewBox="0 0 48 48"
-                        aria-hidden="true"
-                      >
+                        aria-hidden="true">
                         <path
                           d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
                           strokeWidth={2}
@@ -133,8 +128,7 @@ export const HospitalityForm: React.FC<Props> = ({ onAbort }) => {
                       <div className="flex text-sm text-gray-600">
                         <label
                           htmlFor="file-upload"
-                          className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
-                        >
+                          className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                           <span>Ajouter des photos</span>
                           <input
                             id="file-upload"
@@ -145,9 +139,7 @@ export const HospitalityForm: React.FC<Props> = ({ onAbort }) => {
                         </label>
                         <p className="pl-1">or drag and drop</p>
                       </div>
-                      <p className="text-xs text-gray-500">
-                        PNG, JPG, GIF up to 10MB
-                      </p>
+                      <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
                     </div>
                   </div>
                 </div>
@@ -198,17 +190,12 @@ export const HospitalityForm: React.FC<Props> = ({ onAbort }) => {
                 </div>
               </div>
               <div className="flex justify-between">
-                <button
-                  onClick={onAbort}
-                  type="submit"
-                  className="text-dark underline"
-                >
+                <button onClick={onAbort} type="submit" className="text-dark underline">
                   Annuler
                 </button>
                 <button
                   type="submit"
-                  className="inline-flex justify-center py-4 px-20 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
+                  className="inline-flex justify-center py-4 px-20 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                   Mettre à disposition mon logement
                 </button>
               </div>

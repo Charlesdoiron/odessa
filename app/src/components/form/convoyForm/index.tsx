@@ -30,18 +30,10 @@ const formatInitialValues = (initialValues = {}) => {
   return formatted;
 };
 
-export const ConvoyForm: React.FC<Props> = ({
-  onAbort,
-  initialValues,
-  isEditing,
-}) => {
-  const [pickupGeometry, setPickupGeometry] = useState(
-    initialValues?.pickupGeometry
-  );
+export const ConvoyForm: React.FC<Props> = ({ onAbort, initialValues, isEditing }) => {
+  const [pickupGeometry, setPickupGeometry] = useState(initialValues?.pickupGeometry);
   const [pickupName, setPickupName] = useState(initialValues?.pickupName);
-  const [dropOffGeometry, setDropOffGeometry] = useState(
-    initialValues?.dropOffGeometry
-  );
+  const [dropOffGeometry, setDropOffGeometry] = useState(initialValues?.dropOffGeometry);
   const [dropOffName, setDropOffName] = useState(initialValues?.dropOffName);
   const navigate = useNavigate();
   const {
@@ -61,16 +53,17 @@ export const ConvoyForm: React.FC<Props> = ({
       pickupGeometry,
       dropOffName,
       dropOffGeometry,
+      type: "convoy",
     };
 
     if (isEditing) {
       response = await API.put({
-        path: `/convoy/${initialValues?._id}`,
+        path: `/event/${initialValues?._id}`,
         body,
       });
     } else {
       response = await API.post({
-        path: "/convoy",
+        path: "/event",
         body,
       });
     }
@@ -85,9 +78,7 @@ export const ConvoyForm: React.FC<Props> = ({
       <div>
         <div className=" w-full">
           <div className="bg-white space-y-6 sm:p-6 w-full">
-            <p className="text-[30px] font-bold text-dark inline-block">
-              Créer un
-            </p>
+            <p className="text-[30px] font-bold text-dark inline-block">Créer un</p>
             <p className="text-[30px] font-bold text-indigo-600 inline-block ml-2 underline">
               convoi
             </p>
@@ -291,17 +282,12 @@ export const ConvoyForm: React.FC<Props> = ({
                 </div>
               </div>
               <div className="flex justify-between">
-                <button
-                  onClick={onAbort}
-                  type="submit"
-                  className="text-dark underline"
-                >
+                <button onClick={onAbort} type="submit" className="text-dark underline">
                   Annuler
                 </button>
                 <button
                   type="submit"
-                  className="inline-flex justify-center py-4 px-20 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
+                  className="inline-flex justify-center py-4 px-20 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                   {isEditing ? "Modifier le convoi" : "Créer le convoi"}
                 </button>
               </div>
