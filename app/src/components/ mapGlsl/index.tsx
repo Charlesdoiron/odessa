@@ -9,7 +9,7 @@ import Map, {
   GeolocateControl,
 } from "react-map-gl";
 
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 
 import Pin from "./pin";
 import { ConvoyType } from "typings";
@@ -36,9 +36,17 @@ interface Props {
 
 export const CustomMap: React.FC<Props> = ({ data, zoom }) => {
   const { id } = useParams<{ id: string }>();
+  const [, setSearchParams] = useSearchParams();
 
   const [popupInfo, setPopupInfo] = useState<PopupInfo | null>(null);
   const mapRef = React.useRef<any>();
+
+  const handleDrag = (e: any) => {
+    const { longitude, latitude } = e.viewState;
+    setTimeout(() => {
+      setSearchParams({ location: `${longitude}%${latitude}` });
+    }, 700);
+  };
 
   const pins = useMemo(
     () =>
@@ -95,6 +103,7 @@ export const CustomMap: React.FC<Props> = ({ data, zoom }) => {
   }, [id, data]);
 
   if (!data) return <div>Loading...</div>;
+
   return (
     <>
       <Map
@@ -108,6 +117,7 @@ export const CustomMap: React.FC<Props> = ({ data, zoom }) => {
         }}
         mapStyle="mapbox://styles/mapbox/dark-v9"
         mapboxAccessToken={TOKEN}
+        onDrag={(r) => handleDrag(r)}
       >
         <GeolocateControl position="top-left" />
         <FullscreenControl position="top-left" />
