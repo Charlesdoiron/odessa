@@ -21,6 +21,8 @@ import { UserProvider } from "context/user-context";
 import { AuthProvider } from "context/auth-context";
 import { RequireAuth } from "hooks/auth";
 import { Profile } from "page/profile";
+import { Legals } from "page/legals";
+import { About } from "page/about";
 
 const App: React.FC = () => {
   return (
@@ -40,12 +42,18 @@ const App: React.FC = () => {
               <Route path="/collect-create" element={<CollectCreate />}></Route>
               <Route path="/hospitality/:id" element={<Collect />}></Route>
               <Route path="/hospitality" element={<Home />}></Route>
-              <Route path="/hospitality-create" element={<HospitalityCreate />}></Route>
+              <Route
+                path="/hospitality-create"
+                element={<HospitalityCreate />}
+              ></Route>
               <Route path="/hospitality/:id" element={<Hospitality />}></Route>
               <Route path="/driver-create" element={<DriverCreate />}></Route>
               <Route path="/map" element={<Home />}></Route>
               <Route path="/connexion" element={<Login />}></Route>
               <Route path="/inscription" element={<Signup />}></Route>
+              <Route path="/mentions-legales" element={<Legals />}></Route>
+              <Route path="/a-propos" element={<About />}></Route>
+
               <Route
                 path="/profile"
                 element={
