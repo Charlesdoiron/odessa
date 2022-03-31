@@ -13,10 +13,10 @@ const filters = [
     label: "Je cherche un convoi",
     value: "convoy",
   },
-  {
-    label: "Je cherche une place dans un véhicule",
-    value: "availableSeat",
-  },
+  // {
+  //   label: "Je cherche une place dans un véhicule",
+  //   value: "availableSeat",
+  // },
   {
     label: "Шукаю житло",
     value: "housing",
@@ -42,11 +42,6 @@ export const Filters: React.FC = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    console.log({ ...searchParams, type: selected });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selected, setSearchParams]);
 
   return (
     <>

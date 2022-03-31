@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { Fragment } from "react";
 import { Combobox, Transition } from "@headlessui/react";
-import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
+import { CheckIcon, SearchIcon, SelectorIcon } from "@heroicons/react/solid";
 
 interface Props {
   type: string;
@@ -17,6 +17,7 @@ interface Props {
   setQuery?: any;
   query?: any;
   selected?: any;
+  withSearchIcon: boolean;
 }
 
 // https://headlessui.dev/react/combobox
@@ -33,6 +34,7 @@ export const InputDropDown: React.FC<Props> = ({
   setQuery,
   query,
   selected,
+  withSearchIcon = false,
 }) => {
   return (
     <Combobox value={selected} onChange={setSelected}>
@@ -41,10 +43,15 @@ export const InputDropDown: React.FC<Props> = ({
           {label}
         </label>
         <div className="mt-1 relative">
+          {!!withSearchIcon && (
+            <div className="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
+              <SearchIcon className="h-5 w-5" aria-hidden="true" />
+            </div>
+          )}
           <Combobox.Input
             className={`mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-5 ${
-              error ? "border-red-500" : ""
-            }`}
+              withSearchIcon ? "pl-10" : ""
+            } ${error ? "border-red-500" : ""}`}
             displayValue={(item: any) => item?.name}
             placeholder={placeholder}
             autoComplete="off"

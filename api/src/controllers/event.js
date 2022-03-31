@@ -12,8 +12,6 @@ router.get(
   // passport.authenticate("user", { session: false }),
   catchErrors(async (req, res) => {
     const query = {};
-    let limit = null;
-    let skip = null;
     if (req.query?.type === "availableSeat") {
       return res.status(404).send({ ok: false, error: "Cette fonctionnalité n'est pas encore disponible. Bientôt ! ⏰" });
     }

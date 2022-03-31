@@ -19,6 +19,7 @@ export const Home = () => {
     const response = await API.get({ path: "/event" }); // searchParams are automatically added
     if (response.ok) {
       setState(response.data);
+      setError(undefined);
     } else {
       setError(response.error);
     }
@@ -37,10 +38,7 @@ export const Home = () => {
   }, [state]);
 
   if (!state) return <>{t("app.loading")}</>;
-  if (error) return <p>{error}</p>;
 
-  if (!state) return <>Chargement ...</>;
-  if (error) return <p>{error}</p>;
   return (
     <main className="-mt-24 pb-8">
       <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 ">
@@ -54,9 +52,7 @@ export const Home = () => {
                 Section title
               </h2>
               <div className="rounded-lg bg-white overflow-hidden shadow">
-                <div className="p-6">
-                  <Cards data={state} />
-                </div>
+                <div className="p-6">{error ? <p>{error}</p> : <Cards data={state} />}</div>
               </div>
             </section>
           </div>

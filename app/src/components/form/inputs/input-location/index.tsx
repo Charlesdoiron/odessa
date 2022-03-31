@@ -12,6 +12,7 @@ interface Props {
   register: any;
   error?: any;
   onSelect?: any;
+  withSearchIcon: boolean;
 }
 
 // https://headlessui.dev/react/combobox
@@ -23,6 +24,7 @@ export const InputLocation: React.FC<Props> = ({
   geometry,
   onChange,
   onChangeGeometry,
+  withSearchIcon,
 }) => {
   const [expression, setExpression] = useState("");
   const [choices, setChoices] = useState([]);
@@ -74,6 +76,7 @@ export const InputLocation: React.FC<Props> = ({
       autoComplete="off" // because it clashes with dropdown
       label={label}
       placeholder={placeholder}
+      withSearchIcon={withSearchIcon}
       choices={choices}
       setSelected={onSelectChoice}
       setQuery={setExpressionManually}
