@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const dbConnection = require("../mongo");
 const MODELNAME = "User";
+const bcrypt = require("bcryptjs");
 
 const Schema = new mongoose.Schema(
   {
@@ -32,6 +33,7 @@ Schema.methods.userResponseModel = function () {
     _id: this._id,
     name: this.name,
     email: this.email,
+    phone: this.phone,
   };
 };
 

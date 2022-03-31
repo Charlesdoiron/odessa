@@ -1,6 +1,6 @@
 import * as React from "react";
 
-type Response = {
+export type Response = {
   ok: boolean;
   token: string;
   user?: {
@@ -24,9 +24,9 @@ type State = {
 };
 type UserProviderProps = { children: React.ReactNode };
 
-const UserStateContext = React.createContext<
-  { state: State; dispatch: Dispatch } | undefined
->(undefined);
+const UserStateContext = React.createContext<{ state: State; dispatch: Dispatch } | undefined>(
+  undefined
+);
 
 function userReducer(state: State, action: Action) {
   switch (action.type) {
@@ -56,11 +56,7 @@ function UserProvider({ children }: UserProviderProps) {
   // NOTE: you *might* need to memoize this value
   // Learn more in http://kcd.im/optimize-context
   const value = { state, dispatch };
-  return (
-    <UserStateContext.Provider value={value}>
-      {children}
-    </UserStateContext.Provider>
-  );
+  return <UserStateContext.Provider value={value}>{children}</UserStateContext.Provider>;
 }
 
 function useCount() {

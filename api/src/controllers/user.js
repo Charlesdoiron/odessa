@@ -57,7 +57,7 @@ router.post(
 );
 
 router.post(
-  "/signin",
+  "/login",
   catchErrors(async (req, res, next) => {
     try {
       z.string().parse(req.body.password);
@@ -102,7 +102,7 @@ router.get(
       return next(error);
     }
 
-    return res.status(200).send({ ok: true, token, user: req.user.userResponseModel() });
+    return res.status(200).send({ ok: true, user: req.user.userResponseModel() });
   })
 );
 
@@ -170,24 +170,24 @@ router.post(
 );
 
 router.post(
-  "/",
-  passport.authenticate("user", { session: false }),
+  "/signup",
   catchErrors(async (req, res, next) => {
+    console.log(req.body);
     try {
       z.string().min(1).parse(req.body.name);
       z.optional(z.string().min(1)).parse(req.body.phone);
       z.string().email().parse(req.body.email);
-      z.string().min(1).parse(req.body.newPassword);
-      z.string().min(1).parse(req.body.verifyPassword);
+      z.string().min(1).parse(req.body.password);
+      z.string().min(1).parse(req.body.confirmPassword);
     } catch (e) {
       const error = new Error(`Invalid request in user creation: ${e}`);
       error.status = 400;
       return next(error);
     }
 
-    const { name, email, phone, password, verifyPassword } = req.body;
+    const { name, email, phone, password, confirmPassword } = req.body;
 
-    if (password !== verifyPassword) return res.status(400).send({ ok: false, error: "Les mots de passe ne sont pas identiques" });
+    if (password !== confirmPassword) return res.status(400).send({ ok: false, error: "Les mots de passe ne sont pas identiques" });
     if (!validatePassword(password)) return res.status(400).send({ ok: false, error: passwordCheckError, code: PASSWORD_NOT_VALIDATED });
 
     const newUser = {
@@ -219,16 +219,16 @@ router.post(
     try {
       z.string().min(1).parse(req.body.password);
       z.string().min(1).parse(req.body.newPassword);
-      z.string().min(1).parse(req.body.verifyPassword);
+      z.string().min(1).parse(req.body.confirmPassword);
     } catch (e) {
       const error = new Error(`Invalid request in reset password: ${e}`);
       error.status = 400;
       return next(error);
     }
     const _id = req.user._id;
-    const { password, newPassword, verifyPassword } = req.body;
+    const { password, newPassword, confirmPassword } = req.body;
 
-    if (newPassword !== verifyPassword) return res.status(400).send({ ok: false, error: "Les mots de passe ne sont pas identiques" });
+    if (newPassword !== confirmPassword) return res.status(400).send({ ok: false, error: "Les mots de passe ne sont pas identiques" });
     if (!validatePassword(newPassword)) return res.status(400).send({ ok: false, error: passwordCheckError, code: PASSWORD_NOT_VALIDATED });
 
     const user = await UserModel.findById(_id);
