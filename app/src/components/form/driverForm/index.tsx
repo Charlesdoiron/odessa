@@ -38,8 +38,8 @@ export const DriverForm: React.FC<Props> = ({ onAbort }) => {
   } = useForm();
   const onSubmit = handleSubmit(async (form) => {
     const response = await API.post({
-      path: "/convoy",
-      body: { ...form, pickupName, pickupGeometry },
+      path: "/event",
+      body: { ...form, type: "convoy", pickupName, pickupGeometry },
     });
     if (!response.ok) return alert(response.error);
     navigate("/");
@@ -52,9 +52,7 @@ export const DriverForm: React.FC<Props> = ({ onAbort }) => {
       <div>
         <div className=" w-full">
           <div className="bg-white space-y-6 sm:p-6 w-full">
-            <p className="text-[30px] font-bold text-dark inline-block">
-              Je suis
-            </p>
+            <p className="text-[30px] font-bold text-dark inline-block">Je suis</p>
             <p className="text-[30px] font-bold text-indigo-600 inline-block ml-2 underline">
               chauffeur
             </p>
@@ -258,17 +256,12 @@ export const DriverForm: React.FC<Props> = ({ onAbort }) => {
                 </div>
               </div>
               <div className="flex justify-between">
-                <button
-                  onClick={onAbort}
-                  type="submit"
-                  className="text-dark underline"
-                >
+                <button onClick={onAbort} type="submit" className="text-dark underline">
                   Annuler
                 </button>
                 <button
                   type="submit"
-                  className="inline-flex justify-center py-4 px-20 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
+                  className="inline-flex justify-center py-4 px-20 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                   Créer la collecte
                 </button>
               </div>

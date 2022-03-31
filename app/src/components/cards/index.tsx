@@ -19,9 +19,7 @@ export const Cards = () => {
   const location = useLocation();
 
   const refresh = async () => {
-    const response = await API.get({
-      path: `/${searchParams.get("type")}`,
-    });
+    const response = await API.get({ path: "/event" }); // searchParams are automatically added
     if (response.ok) {
       setState(response.data);
     } else {
