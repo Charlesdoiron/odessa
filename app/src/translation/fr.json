@@ -1,0 +1,17 @@
+{
+  "translation": {
+    "cards": {
+      "convoy": "Convoi",
+      "full": "plein"
+    },
+    "app": {
+      "loading": "Chargement ..."
+    },
+    "layout": {
+      "inputSearch": "Rechercher par adresse / ville",
+      "createConvoy": "Je crée un convoi",
+      "createCollect": "Je crée une collecte",
+      "driver": "Je suis chauffeur"
+    }
+  }
+}

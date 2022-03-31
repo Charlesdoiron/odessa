@@ -20,7 +20,7 @@ type ConvoyRes = {
 export const getConvoy = async (id: string | undefined) => {
   if (!id) return;
   const response = await API.get({
-    path: `/convoy/${id}`,
+    path: `/event/${id}`,
   });
 
   return response as ConvoyRes;
@@ -28,17 +28,15 @@ export const getConvoy = async (id: string | undefined) => {
 
 export const getConvoys = async () => {
   const response = await API.get({
-    path: `/convoy`,
+    path: `/event`,
   });
 
   return response as ConvoysRes;
 };
 
 export const deleteConvoy = async (id: string | undefined) => {
-  if (!id) return;
-  const response = await API.delete({
-    path: `/convoy/${id}`,
-  });
+  if (!id) return null;
+  const response = await API.delete({ path: `/event/${id}` });
 
   return response;
 };

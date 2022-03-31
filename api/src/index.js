@@ -34,9 +34,8 @@ require("./passport")(app);
 
 app.use("/user", require("./controllers/user"));
 app.use("/location", require("./controllers/location"));
-app.use("/convoy", require("./controllers/convoy"));
-app.use("/collect", require("./controllers/collect"));
 app.use("/picture", require("./controllers/picture"));
+app.use("/event", require("./controllers/event"));
 
 app.use(errors.sendError);
 
