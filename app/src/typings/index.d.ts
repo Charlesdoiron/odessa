@@ -12,6 +12,7 @@ export interface Geometry {
 }
 
 export type CollectType = {
+  type: "collect";
   _id: string;
   title: string;
   pickupName: string;
@@ -30,6 +31,7 @@ export type CollectType = {
 };
 
 export interface ConvoyType {
+  type: "convoy";
   _id: string;
   title: string;
   pickupName: string;

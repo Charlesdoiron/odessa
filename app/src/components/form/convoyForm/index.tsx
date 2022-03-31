@@ -68,7 +68,7 @@ export const ConvoyForm: React.FC<Props> = ({ onAbort, initialValues, isEditing 
       });
     }
     if (!response.ok) return alert(response.error);
-    else navigate("/");
+    else navigate(`/convoy/${response.data._id}`);
   });
 
   const showOtherDrivers = watch("needDrivers");
@@ -78,10 +78,16 @@ export const ConvoyForm: React.FC<Props> = ({ onAbort, initialValues, isEditing 
       <div>
         <div className=" w-full">
           <div className="bg-white space-y-6 sm:p-6 w-full">
-            <p className="text-[30px] font-bold text-dark inline-block">Créer un</p>
-            <p className="text-[30px] font-bold text-indigo-600 inline-block ml-2 underline">
-              convoi
-            </p>
+            {isEditing ? (
+              <p className="text-[30px] font-bold text-dark inline-block">Modifier le convoi</p>
+            ) : (
+              <p className="text-[30px] font-bold text-dark inline-block">
+                Créer un
+                <em className="text-[30px] font-bold text-indigo-600 inline-block ml-2 underline">
+                  convoi
+                </em>
+              </p>
+            )}
             <form onSubmit={onSubmit}>
               <div className=" bg-white ">
                 <div className="w-full mb-5">
