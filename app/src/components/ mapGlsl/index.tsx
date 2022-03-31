@@ -9,7 +9,7 @@ import Map, {
   GeolocateControl,
 } from "react-map-gl";
 
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 
 import Pin from "./pin";
 import { ConvoyType } from "typings";
@@ -32,13 +32,26 @@ type PopupInfo = {
 interface Props {
   data: ConvoyType[];
   zoom?: number;
+  noSearchOnDrag?: boolean;
 }
 
-export const CustomMap: React.FC<Props> = ({ data, zoom }) => {
+export const CustomMap: React.FC<Props> = ({ data, zoom, noSearchOnDrag }) => {
   const { id } = useParams<{ id: string }>();
+  const [, setSearchParams] = useSearchParams();
 
   const [popupInfo, setPopupInfo] = useState<PopupInfo | null>(null);
   const mapRef = React.useRef<any>();
+
+  const handleDrag = (e: {
+    viewState: { longitude: number; latitude: number };
+  }) => {
+    if (!e) return;
+    if (noSearchOnDrag) return;
+    const { longitude, latitude } = e.viewState;
+    setTimeout(() => {
+      setSearchParams({ location: `${longitude}%${latitude}` });
+    }, 700);
+  };
 
   const pins = useMemo(
     () =>
@@ -95,6 +108,7 @@ export const CustomMap: React.FC<Props> = ({ data, zoom }) => {
   }, [id, data]);
 
   if (!data) return <div>Loading...</div>;
+
   return (
     <>
       <Map
@@ -108,6 +122,7 @@ export const CustomMap: React.FC<Props> = ({ data, zoom }) => {
         }}
         mapStyle="mapbox://styles/mapbox/dark-v9"
         mapboxAccessToken={TOKEN}
+        onDrag={(e) => handleDrag(e)}
       >
         <GeolocateControl position="top-left" />
         <FullscreenControl position="top-left" />
