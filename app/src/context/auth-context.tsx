@@ -2,9 +2,12 @@ import React, { useEffect } from "react";
 import API from "services/api";
 
 type User = {
-  email: string;
-  name: string;
-  _id: string;
+  ok: boolean;
+  user?: {
+    email: string;
+    name: string;
+    _id: string;
+  };
 };
 
 export type SignupType = {
