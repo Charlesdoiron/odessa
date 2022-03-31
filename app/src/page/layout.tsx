@@ -6,8 +6,8 @@ import { Cards } from "components/cards";
 import classNames from "services/classNames";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Filters } from "components/filters";
+import { useAuth } from "hooks/auth";
 import { useTranslation } from "react-i18next";
-import API from "services/api";
 
 const user = {
   name: "Charles d'Oiron",
@@ -25,15 +25,15 @@ export const Layout = ({ children }: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { pathname } = location;
-
+  let auth = useAuth();
   const logout = async () => {
-    await API.post({
-      path: "/user/logout",
-    }).then(() => navigate("/connexion"));
+    auth.logout(() => {
+      navigate("/connexion");
+    });
   };
 
   const userNavigation = [
-    { name: "Votre profil", onClick: () => navigate("/") },
+    { name: "Votre profil", onClick: () => navigate("/profile") },
     { name: "Se connecter", onClick: () => navigate("/connexion") },
     { name: "Se déconnecter", onClick: () => logout() },
   ];
@@ -57,6 +57,8 @@ export const Layout = ({ children }: Props) => {
       </div>
     );
   }
+
+  console.log(auth.user);
 
   return (
     <>
