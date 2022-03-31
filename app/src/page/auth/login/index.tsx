@@ -4,9 +4,11 @@ import { useForm } from "react-hook-form";
 import { Input } from "components/form/inputs/input";
 import API from "services/api";
 import { useNavigate } from "react-router-dom";
+import { useCount } from "context/user-context";
 
-export const Signin: React.FC = () => {
+export const Login: React.FC = () => {
   const navigate = useNavigate();
+  const { dispatch } = useCount();
 
   const {
     register,
@@ -16,16 +18,20 @@ export const Signin: React.FC = () => {
 
   const onSubmit = handleSubmit(async (form) => {
     const response = await API.post({
-      path: "/user/signin",
+      path: "/user/login",
       body: { ...form },
     });
+
     if (!response.ok) return alert(response.error);
-    else navigate("/");
+    else {
+      dispatch({ type: "logged", payload: response });
+      navigate("/");
+    }
   });
   return (
     <>
       <div className="min-h-full flex items-center justify-center md:w-2/6 sm:w-3/6 w-full mx-10 md:mx-0 md:min-w-[500px] ">
-        <div className=" w-full ">
+        <div className=" w-full space-y-8">
           <div>
             <img
               className="mx-auto h-12 w-auto"
@@ -33,15 +39,14 @@ export const Signin: React.FC = () => {
               alt="Workflow"
             />
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-              S'inscrire
+              Se connecter
             </h2>
           </div>
-          <form className=" space-y-8" onSubmit={onSubmit}>
+          <form className="mt-8 space-y-6" onSubmit={onSubmit}>
             <input type="hidden" name="remember" defaultValue="true" />
-            <div className="rounded-md shadow-sm ">
+            <div className="rounded-md shadow-sm -space-y-px">
               <div className="mb-2">
                 <Input
-                  required
                   type="email"
                   id="email"
                   autoComplete="email"
@@ -53,40 +58,8 @@ export const Signin: React.FC = () => {
                   error={errors.email}
                 />
               </div>
-
-              <div className="grid grid-cols-6 gap-6 mb-5 ">
-                <div className="col-span-6 sm:col-span-3">
-                  <Input
-                    required
-                    type="text"
-                    id="name"
-                    autoComplete="firstName"
-                    placeholder="Renseigner votre prénom et nom"
-                    label="Prénom et nom"
-                    register={register("name", {
-                      required: true,
-                    })}
-                    error={errors.name}
-                  />
-                </div>
-
-                <div className="col-span-6 sm:col-span-3">
-                  <Input
-                    type="text"
-                    id="phone"
-                    autoComplete="email"
-                    placeholder="Renseigner votre téléphone"
-                    label="Téléphone"
-                    register={register("phone", {
-                      required: true,
-                    })}
-                    error={errors.phone}
-                  />
-                </div>
-              </div>
-              <div className="mb-2">
+              <div>
                 <Input
-                  required
                   type="password"
                   id="password"
                   autoComplete="off"
@@ -98,21 +71,6 @@ export const Signin: React.FC = () => {
                   error={errors.password}
                 />
               </div>
-
-              <div className="mb-2">
-                <Input
-                  required
-                  type="password"
-                  id="confirmPassword"
-                  autoComplete="off"
-                  placeholder="Confirmation de votre mot de passe"
-                  label="Mot de passe"
-                  register={register("confirmPassword", {
-                    required: true,
-                  })}
-                  error={errors.confirmPassword}
-                />
-              </div>
             </div>
 
             <div className="flex items-center justify-between">
@@ -122,7 +80,6 @@ export const Signin: React.FC = () => {
                   name="remember-me"
                   type="checkbox"
                   className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                  defaultChecked
                 />
                 <label
                   htmlFor="remember-me"
