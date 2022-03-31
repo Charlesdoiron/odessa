@@ -76,6 +76,7 @@ export const Login: React.FC = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <input
+                  defaultChecked
                   id="remember-me"
                   name="remember-me"
                   type="checkbox"
