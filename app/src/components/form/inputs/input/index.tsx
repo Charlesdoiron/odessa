@@ -7,6 +7,7 @@ interface Props {
   register: any;
   error?: any;
   onChange?: any;
+  required?: boolean;
 }
 
 export const Input: React.FC<Props> = ({
@@ -17,11 +18,13 @@ export const Input: React.FC<Props> = ({
   autoComplete = "",
   register,
   error,
+  // only for showing * in front (use form already manage required)
+  required,
 }) => {
   return (
     <>
       <label htmlFor={id} className="block text-sm font-medium text-gray-700">
-        {label}
+        {label} {required ? "*" : ""}
       </label>
       <input
         {...register}
