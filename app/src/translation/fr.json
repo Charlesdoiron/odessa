@@ -12,6 +12,9 @@
       "createConvoy": "Je crée un convoi",
       "createCollect": "Je crée une collecte",
       "driver": "Je suis chauffeur"
+    },
+    "settings": {
+      "traduction": "Traductions"
     }
   }
 }
