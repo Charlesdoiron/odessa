@@ -32,10 +32,10 @@ type PopupInfo = {
 interface Props {
   data: ConvoyType[];
   zoom?: number;
-  noSearchOnDrag?: boolean;
+  searchOnDrag?: boolean;
 }
 
-export const CustomMap: React.FC<Props> = ({ data, zoom, noSearchOnDrag }) => {
+export const CustomMap: React.FC<Props> = ({ data, zoom, searchOnDrag }) => {
   const { id } = useParams<{ id: string }>();
   const [, setSearchParams] = useSearchParams();
 
@@ -46,11 +46,12 @@ export const CustomMap: React.FC<Props> = ({ data, zoom, noSearchOnDrag }) => {
     viewState: { longitude: number; latitude: number };
   }) => {
     if (!e) return;
-    if (noSearchOnDrag) return;
-    const { longitude, latitude } = e.viewState;
-    setTimeout(() => {
-      setSearchParams({ location: `${longitude}%${latitude}` });
-    }, 700);
+    if (searchOnDrag) {
+      const { longitude, latitude } = e.viewState;
+      setTimeout(() => {
+        setSearchParams({ location: `${longitude}%${latitude}` });
+      }, 700);
+    }
   };
 
   const pins = useMemo(

@@ -52,7 +52,7 @@ export const Convoy: React.FC = () => {
         <div className="rounded-lg bg-white overflow-hidden shadow">
           <div className="rounded-lg bg-white  relative ">
             <div className="w-full h-[300px]">
-              <CustomMap data={[state]} noSearchOnDrag />
+              <CustomMap data={[state]} />
             </div>
           </div>
           <div className="p-6">
