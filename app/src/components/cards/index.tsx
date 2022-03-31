@@ -1,6 +1,7 @@
 import { LocationMarkerIcon, UsersIcon, BriefcaseIcon } from "@heroicons/react/solid";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import useWindowFocus from "use-window-focus";
+import { useTranslation } from 'react-i18next';
 
 // Mocks
 import { useEffect, useState } from "react";
@@ -8,6 +9,8 @@ import { ConvoyType } from "typings";
 import API from "services/api";
 
 export const Cards = () => {
+  const { t } = useTranslation();
+
   const [state, setState] = useState<ConvoyType[] | null>(null);
   const [error, setError] = useState<string | undefined>(undefined);
   const [searchParams] = useSearchParams();
@@ -38,7 +41,7 @@ export const Cards = () => {
     }
   }, [state]);
 
-  if (!state) return <>Chargement ...</>;
+  if (!state) return <>{t('app.loading')}</>;
   if (error) return <p>{error}</p>;
 
   return (
@@ -68,6 +71,17 @@ export const Cards = () => {
                       }`}>
                       Convoi - {status?.label.toLowerCase()}
                     </p>
+                    <div className="ml-2 flex-shrink-0 flex">
+                      <p
+                        className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full  ${
+                          isConvoy
+                            ? "bg-green-100 text-green-800"
+                            : "bg-yellow-100 text-yellow-800"
+                        }`}
+                      >
+                        {t('cards.convoy')} - {status?.label.toLowerCase()}
+                      </p>
+                    </div>
                   </div>
                 </div>
                 <div className="mt-2 sm:flex sm:justify-between">
@@ -89,16 +103,16 @@ export const Cards = () => {
                       </p>
                     )}
                   </div>
-                </div>
-                <div className="mt-2 sm:flex sm:justify-between">
-                  <div className="sm:flex">
-                    <p className="flex items-center text-sm text-gray-500">
-                      <BriefcaseIcon
-                        className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
-                        aria-hidden="true"
-                      />
-                      {availableVolume}% plein
-                    </p>
+                  <div className="mt-2 sm:flex sm:justify-between">
+                    <div className="sm:flex">
+                      <p className="flex items-center text-sm text-gray-500">
+                        <BriefcaseIcon
+                          className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                          aria-hidden="true"
+                        />
+                        {availableVolume}% {t('cards.full')}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>

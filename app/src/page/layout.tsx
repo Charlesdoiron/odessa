@@ -6,6 +6,7 @@ import { Cards } from "components/cards";
 import classNames from "services/classNames";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Filters } from "components/filters";
+import { useTranslation } from "react-i18next";
 import API from "services/api";
 
 const user = {
@@ -19,6 +20,8 @@ type Props = {
   children: JSX.Element;
 };
 export const Layout = ({ children }: Props) => {
+  const { i18n, t } = useTranslation();
+
   const navigate = useNavigate();
   const location = useLocation();
   const { pathname } = location;
@@ -34,6 +37,14 @@ export const Layout = ({ children }: Props) => {
     { name: "Se connecter", onClick: () => navigate("/connexion") },
     { name: "Se déconnecter", onClick: () => logout() },
   ];
+  type ItemLngs = {
+    nativeName: string;
+  };
+
+  const lngs: Record<string, ItemLngs> = {
+    en: { nativeName: "English" },
+    fr: { nativeName: "Français" },
+  };
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -62,10 +73,25 @@ export const Layout = ({ children }: Props) => {
                   >
                     🇺🇦
                   </div>
+                  <div className="ml-5 flex flex-col">
+                    {Object.keys(lngs).map((lng) => (
+                      <button
+                        key={lng}
+                        style={{
+                          fontWeight:
+                            i18n.resolvedLanguage === lng ? "bold" : "normal",
+                        }}
+                        type="submit"
+                        onClick={() => i18n.changeLanguage(lng)}
+                      >
+                        {lngs[lng].nativeName}
+                      </button>
+                    ))}
+                  </div>
                   <div className="w-3/6 ml-10 lg:visible invisible">
                     <div className="">
                       <label htmlFor="mobile-search" className="sr-only">
-                        Rechercher par adresse / ville
+                        {t("layout.inputSearch")}
                       </label>
                       <div className="relative text-white focus-within:text-gray-600">
                         <div className="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
@@ -74,7 +100,7 @@ export const Layout = ({ children }: Props) => {
                         <input
                           id="mobile-search"
                           className="block w-full bg-white bg-opacity-20 py-5 pl-10 pr-3 border border-transparent rounded-md leading-5 text-gray-900 placeholder-white focus:outline-none focus:bg-opacity-100 focus:border-transparent focus:placeholder-gray-500 focus:ring-0 sm:text-sm"
-                          placeholder="Rechercher par adresse / ville"
+                          placeholder={t("layout.inputSearch")}
                           type="search"
                           name="search"
                         />
@@ -89,21 +115,21 @@ export const Layout = ({ children }: Props) => {
                       type="button"
                       className="flex-shrink-0 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5 py-5"
                     >
-                      Je crée un convoi
+                      {t("layout.createConvoy")}
                     </Link>
                     <Link
                       to="/collect-create"
                       type="button"
                       className="flex-shrink-0 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5 py-5"
                     >
-                      Je crée une collecte
+                      {t("layout.createCollect")}
                     </Link>
                     <Link
                       to="/driver-create"
                       type="button"
                       className="flex-shrink-0 rounded-md hover:text-white bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white p-3 text-black mr-5 py-5"
                     >
-                      Je suis chauffeur
+                      {t("layout.driver")}
                     </Link>
                     {/* <Link
                       to="/hospitality-create"
@@ -156,7 +182,7 @@ export const Layout = ({ children }: Props) => {
                   <div className="flex-1 min-w-full  lg:hidden mx-auto">
                     <div className=" w-full ">
                       <label htmlFor="desktop-search" className="sr-only">
-                        Rechercher par adresse / ville
+                        {t("layout.inputSearch")}
                       </label>
                       <div className="relative text-white focus-within:text-gray-600 w-[80%]">
                         <div className="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
@@ -165,7 +191,7 @@ export const Layout = ({ children }: Props) => {
                         <input
                           id="desktop-search"
                           className="block w-full bg-white bg-opacity-20 py-2 pl-10 pr-3 border border-transparent rounded-md leading-5 text-gray-900 placeholder-white focus:outline-none focus:bg-opacity-100 focus:border-transparent focus:placeholder-gray-500 focus:ring-0 sm:text-sm"
-                          placeholder="Rechercher par adresse / ville"
+                          placeholder={t("layout.inputSearch")}
                           type="search"
                           name="search"
                         />
