@@ -34,17 +34,20 @@ export const Convoy: React.FC = () => {
   if (!state) return <></>;
   if (error) return <p>{error}</p>;
   return (
-    <div className="grid grid-cols-1 gap-4 lg:col-span-2 ">
-      <section aria-labelledby="section-1-title">
-        <div className=" text-dark md:text-white text-right text-[12px] md:-mt-6 mb-2 cursor-pointer flex justify-end">
+    <div className="grid grid-cols-1 gap-4 lg:col-span-2 mx-5 md:mx-10 md:-mt-[70px] -mt-[90px] md:mb-10 mb-5 ">
+      <section aria-labelledby="section-1-title ">
+        <div
+          className=" text-white text-right text-[14px] md:-mt-6 mb-2 cursor-pointer flex justify-start"
+          onClick={() => navigate("/")}
+        >
           <p>
             <ArrowLeftIcon
-              className="mr-1.5 h-4 w-4 text-dark md:text-white mt-[0.5px]"
+              className="mr-4 h-4 w-4 text-white mt-[3.5px]"
               aria-hidden="true"
             />
           </p>
 
-          <p onClick={() => navigate("/")}>Revenir à l'accueil</p>
+          <p>Revenir à l'accueil</p>
         </div>
         <div className="rounded-lg bg-white overflow-hidden shadow">
           <div className="rounded-lg bg-white  relative ">
