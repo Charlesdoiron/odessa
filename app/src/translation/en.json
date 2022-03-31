@@ -1,9 +1,17 @@
-{"translation": {
+{
+  "translation": {
     "cards": {
       "convoy": "Convoy",
       "full": "full"
     },
     "app": {
       "loading": "Loading ..."
+    },
+    "layout": {
+      "inputSearch": "Search by address / city",
+      "createConvoy": "I create a convoy",
+      "createCollect": "I create a collect",
+      "driver": "I'am a driver"
     }
-  }}
+  }
+}
