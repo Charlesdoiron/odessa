@@ -1,11 +1,11 @@
 import { LockClosedIcon } from "@heroicons/react/solid";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 import { Input } from "components/form/inputs/input";
-import API from "services/api";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useCount } from "context/user-context";
 import { useAuth } from "hooks/auth";
+import { LoginType } from "context/auth-context";
 
 export const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -21,7 +21,8 @@ export const Login: React.FC = () => {
 
   // @ts-ignore: React router typescript error / need to find solution
   let from = location.state?.from?.pathname || "/";
-  const onSubmit = handleSubmit(async (form) => {
+  const onSubmit = handleSubmit((form: any) => {
+    console.log("FOO", form);
     auth.login({ ...form }, () => {
       navigate(from, { replace: true });
     });

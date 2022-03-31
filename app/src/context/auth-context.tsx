@@ -1,10 +1,29 @@
 import React, { useEffect } from "react";
 import API from "services/api";
 
+type User = {
+  email: string;
+  name: string;
+  _id: string;
+};
+
+export type SigninType = {
+  email: string;
+  password: string;
+  confirmPassword: string;
+  phone?: string;
+  name: string;
+};
+
+export type LoginType = {
+  email: string;
+  password: string;
+};
+
 interface AuthContextType {
-  user: Record<string, any>;
-  login: (user: Record<string, any>, callback: VoidFunction) => void;
-  signin: (user: Record<string, any>, callback: VoidFunction) => void;
+  user: User;
+  login: (user: LoginType, callback: VoidFunction) => void;
+  signin: (user: SigninType, callback: VoidFunction) => void;
   logout: (callback: VoidFunction) => void;
 }
 
@@ -21,10 +40,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   useEffect(() => {
-    getUserByToken().then((d) => console.log(d));
-  });
+    if (!user) {
+      getUserByToken().then((d) => console.log(d));
+    }
+  }, [user]);
 
-  let signin = async (form: Record<string, any>, callback: VoidFunction) => {
+  let signin = async (form: SigninType, callback: VoidFunction) => {
     const response = await API.post({
       path: "/user/signin",
       body: { ...form },
@@ -33,7 +54,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     callback();
   };
 
-  let login = async (form: Record<string, any>, callback: VoidFunction) => {
+  let login = async (form: LoginType, callback: VoidFunction) => {
     const response = await API.post({
       path: "/user/login",
       body: { ...form },

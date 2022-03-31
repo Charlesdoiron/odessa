@@ -19,7 +19,7 @@ export const Signin: React.FC = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = handleSubmit(async (form) => {
+  const onSubmit = handleSubmit(async (form: any) => {
     auth.signin({ ...form }, () => {
       navigate(from, { replace: true });
     });
